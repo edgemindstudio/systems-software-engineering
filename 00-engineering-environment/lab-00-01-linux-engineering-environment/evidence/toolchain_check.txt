@@ -1,0 +1,66 @@
+========================================
+SYSTEMS ENGINEERING ENVIRONMENT CHECK
+========================================
+
+[SYSTEM]
+Linux poisedre 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 GNU/Linux
+
+[OS]
+PRETTY_NAME="Kali GNU/Linux Rolling"
+NAME="Kali GNU/Linux"
+VERSION_ID="2026.1"
+VERSION="2026.1"
+VERSION_CODENAME=kali-rolling
+ID=kali
+ID_LIKE=debian
+HOME_URL="https://www.kali.org/"
+SUPPORT_URL="https://forums.kali.org/"
+BUG_REPORT_URL="https://bugs.kali.org/"
+ANSI_COLOR="1;31"
+
+[ARCHITECTURE]
+x86_64
+
+[SHELL]
+/bin/bash
+
+[COMPILERS]
+gcc (Debian 15.2.0-14) 15.2.0
+Debian clang version 21.1.8 (7+b1)
+g++ (Debian 15.2.0-14) 15.2.0
+Debian clang version 21.1.8 (7+b1)
+
+[BUILD TOOLS]
+cmake version 4.3.3
+ninja 1.13.2
+GNU Make 4.4.1
+
+[DEBUGGERS]
+GNU gdb (Debian 17.1-3) 17.1
+lldb version 21.1.8
+
+[STATIC ANALYSIS]
+Debian LLVM version 21.1.8
+Cppcheck 2.20.0
+
+[MEMORY / CORRECTNESS TOOLS]
+valgrind-3.25.1
+
+[TRACING / PERFORMANCE]
+strace -- version 7.0
+ltrace 0.7.91
+perf version 6.19.14
+
+[BINARY TOOLS]
+GNU objdump (GNU Binutils for Debian) 2.46
+GNU readelf (GNU Binutils for Debian) 2.46
+GNU nm (GNU Binutils for Debian) 2.46
+xxd: installed (/usr/bin/xxd)
+
+[VERSION CONTROL]
+git version 2.51.0
+gh version 2.95.0 (2026-06-17)
+
+========================================
+CHECK COMPLETE
+========================================
