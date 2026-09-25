@@ -1,0 +1,4 @@
+/usr/bin/x86_64-linux-gnu-ld.bfd: artifacts/main.o: in function `main':
+main.c:(.text+0x1a): undefined reference to `add'
+/usr/bin/x86_64-linux-gnu-ld.bfd: main.c:(.text+0x2c): undefined reference to `multiply'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
