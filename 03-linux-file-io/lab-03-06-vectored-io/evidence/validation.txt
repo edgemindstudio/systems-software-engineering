@@ -1,0 +1,35 @@
+=== LAB 03-06 VALIDATION ===
+Sat Oct 24 05:24:51 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/vectored_demo
+
+=== PROGRAM OUTPUT ===
+writev_bytes=34
+readv_bytes=34
+part1=TYPE=event
+part2=payload=systems-io
+part3=END
+
+=== FILE CONTENT ===
+TYPE=event
+payload=systems-io
+END
+
+=== STRACE ===
+writev(3, [{iov_base="TYPE=event\n", iov_len=11}, {iov_base="payload=systems-io\n", iov_len=19}, {iov_base="END\n", iov_len=4}], 3) = 34
+lseek(3, 0, SEEK_SET)                   = 0
+readv(3, [{iov_base="TYPE=event\n", iov_len=11}, {iov_base="payload=systems-io\n", iov_len=19}, {iov_base="END\n", iov_len=4}], 3) = 34
+writev_bytes=34
+readv_bytes=34
+part1=TYPE=event
+part2=payload=systems-io
+part3=END
++++ exited with 0 +++
+
+=== ASSERTIONS ===
+vectored_io_verified=yes
+
+=== RESULT ===
+PASS

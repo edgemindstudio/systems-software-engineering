@@ -1,0 +1,39 @@
+=== LAB 03-07 VALIDATION ===
+Sat Oct 24 05:24:51 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/mmap_demo
+
+=== BEFORE ===
+hello from mmap validation
+
+=== PROGRAM OUTPUT ===
+mapped_size=27
+new_prefix=MMAP!
+
+=== AFTER ===
+MMAP! from mmap validation
+
+=== ASSERTIONS ===
+mapped_mutation_persisted=yes
+
+=== STRACE MMAP/MSYNC ===
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7cc4d29de000
+mmap(NULL, 83395, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7cc4d29c9000
+mmap(NULL, 2055760, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7cc4d27d3000
+mmap(0x7cc4d27fb000, 1474560, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x7cc4d27fb000
+mmap(0x7cc4d2963000, 339968, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x190000) = 0x7cc4d2963000
+mmap(0x7cc4d29b6000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e3000) = 0x7cc4d29b6000
+mmap(0x7cc4d29bc000, 52816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7cc4d29bc000
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7cc4d27d0000
+munmap(0x7cc4d29c9000, 83395)           = 0
+mmap(NULL, 27, PROT_READ|PROT_WRITE, MAP_SHARED, 3, 0) = 0x7cc4d29dd000
+msync(0x7cc4d29dd000, 27, MS_SYNC)      = 0
+munmap(0x7cc4d29dd000, 27)              = 0
+mapped_size=27
+new_prefix=MMAP!
++++ exited with 0 +++
+
+=== RESULT ===
+PASS

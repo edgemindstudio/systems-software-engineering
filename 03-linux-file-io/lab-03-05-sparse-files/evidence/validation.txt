@@ -1,0 +1,26 @@
+=== LAB 03-05 VALIDATION ===
+Sat Oct 24 05:24:51 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 src/main.c -o build/sparse_demo
+
+=== PROGRAM OUTPUT ===
+logical_size=1048580
+allocated_512_blocks=16
+allocated_bytes=8192
+first_data=0
+first_hole=4096
+
+=== FILESYSTEM VIEW ===
+8 -rw-r--r-- 1 fonke fonke 1048580 Oct 24 05:24 workspace/sparse.bin
+8192	workspace/sparse.bin
+size=1048580 blocks=16 block_size=512
+
+=== ASSERTIONS ===
+logical_bytes=1048580
+allocated_bytes=8192
+sparse_allocation_verified=yes
+
+=== RESULT ===
+PASS

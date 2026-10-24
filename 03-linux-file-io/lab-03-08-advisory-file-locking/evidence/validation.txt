@@ -1,0 +1,21 @@
+=== LAB 03-08 VALIDATION ===
+Sat Oct 24 05:24:51 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/lock_demo
+
+=== START LOCK HOLDER ===
+lock=acquired pid=7330
+
+=== CONTENDING TRY ===
+lock=busy
+contender_exit_status=3
+
+=== WAIT FOR RELEASE ===
+
+=== TRY AFTER RELEASE ===
+lock=acquired pid=7336
+
+=== RESULT ===
+PASS

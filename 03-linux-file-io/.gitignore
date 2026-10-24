@@ -1,0 +1,12 @@
+# Generated build output
+**/build/
+
+# Generated runtime artifacts
+**/workspace/
+**/*.tmp
+**/*.out
+
+# Editor / OS files
+*.swp
+*.swo
+.DS_Store

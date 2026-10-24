@@ -1,0 +1,23 @@
+=== LAB 03-01 VALIDATION ===
+Sat Oct 24 05:24:50 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/fd_copy
+
+=== COPY ===
+4fdbc441ea7b546100e086ac1e4fc5ae6749b7314311c99db05be450eca12996  workspace/source.txt
+4fdbc441ea7b546100e086ac1e4fc5ae6749b7314311c99db05be450eca12996  workspace/destination.txt
+
+=== STRACE SYSCALL SUMMARY ===
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+  0.00    0.000000           0         3           read
+  0.00    0.000000           0         1           write
+  0.00    0.000000           0         4           close
+  0.00    0.000000           0         4           openat
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000000           0        12           total
+
+=== RESULT ===
+PASS

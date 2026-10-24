@@ -1,0 +1,20 @@
+=== LAB 03-02 VALIDATION ===
+Sat Oct 24 05:24:51 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/offset_demo
+
+=== PROGRAM OUTPUT ===
+fd1_byte=A
+dup_fd2_byte=B
+independent_fd3_byte=A
+fd1_offset=2
+fd2_offset=2
+fd3_offset=1
+
+=== ASSERTIONS ===
+shared_offset_verified=yes
+
+=== RESULT ===
+PASS

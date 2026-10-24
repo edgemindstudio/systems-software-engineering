@@ -1,0 +1,18 @@
+=== LAB 03-04 VALIDATION ===
+Sat Oct 24 05:24:51 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/dir_walk
+
+=== DIRECTORY WALK ===
+file-a.txt	regular
+file-b.txt	regular
+link-a	symlink
+subdir	directory
+
+=== ASSERTIONS ===
+entry_classification_verified=yes
+
+=== RESULT ===
+PASS
