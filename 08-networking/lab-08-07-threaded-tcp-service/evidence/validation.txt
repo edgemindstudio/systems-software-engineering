@@ -1,0 +1,18 @@
+=== LAB 08-07 VALIDATION ===
+Sat Oct 24 09:43:33 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -pthread src/main.c -o build/threaded_service_demo
+
+=== PROGRAM OUTPUT ===
+worker=0 received=client-0
+worker=1 received=client-1
+worker=2 received=client-2
+worker=3 received=client-3
+clients_handled=4
+threaded_service_verified=yes
+concurrent_clients_verified=yes
+
+=== RESULT ===
+PASS

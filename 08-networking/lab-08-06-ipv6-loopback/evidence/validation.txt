@@ -1,0 +1,14 @@
+=== LAB 08-06 VALIDATION ===
+Sat Oct 24 09:43:33 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/ipv6_demo
+
+=== PROGRAM OUTPUT ===
+ipv6_received=ipv6-ok
+ipv6_loopback_verified=yes
+ipv6_tcp_verified=yes
+
+=== RESULT ===
+PASS

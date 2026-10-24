@@ -1,0 +1,15 @@
+=== LAB 08-04 VALIDATION ===
+Sat Oct 24 09:43:33 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/framing_demo
+
+=== PROGRAM OUTPUT ===
+decoded_length=21
+decoded_message=framed-message-works!
+framing_verified=yes
+length_prefix_protocol_verified=yes
+
+=== RESULT ===
+PASS

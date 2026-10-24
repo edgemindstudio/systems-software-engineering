@@ -1,0 +1,8 @@
+**/build/
+**/workspace/
+*.tmp
+*.out
+*.log
+*.swp
+*.swo
+.DS_Store

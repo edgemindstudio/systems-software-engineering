@@ -1,0 +1,15 @@
+=== LAB 08-01 VALIDATION ===
+Sat Oct 24 09:43:32 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/address_resolution_demo
+
+=== PROGRAM OUTPUT ===
+family=IPv4 address=127.0.0.1
+resolved_entries=1
+resolution_success=yes
+address_resolution_verified=yes
+
+=== RESULT ===
+PASS

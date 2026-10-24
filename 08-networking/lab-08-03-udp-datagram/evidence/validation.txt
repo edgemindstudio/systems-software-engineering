@@ -1,0 +1,16 @@
+=== LAB 08-03 VALIDATION ===
+Sat Oct 24 09:43:33 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/udp_demo
+
+=== PROGRAM OUTPUT ===
+receiver_port=35710
+received=udp-message
+peer_family_ipv4=yes
+udp_exchange_verified=yes
+udp_datagram_verified=yes
+
+=== RESULT ===
+PASS
