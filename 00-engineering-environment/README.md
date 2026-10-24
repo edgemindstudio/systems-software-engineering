@@ -128,5 +128,5 @@ This domain is complete when the learner can:
 
 - Lab 00-01 — Complete
 - Lab 00-02 — Complete
-- Lab 00-03 — Not started
-- Lab 00-04 — Not started
+- Lab 00-03 — Complete
+- Lab 00-04 — Complete

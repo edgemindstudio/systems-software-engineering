@@ -1,0 +1,47 @@
+=== LAB 00-04 BUILD SYSTEM VALIDATION ===
+
+=== TOOL VERSIONS ===
+Debian clang version 21.1.8 (7+b1)
+GNU Make 4.4.1
+cmake version 4.3.3
+Ninja 1.13.2
+
+=== MANUAL BUILD OUTPUT ===
+add: 14
+multiply: 48
+
+=== MAKE NO-OP BUILD ===
+make: Nothing to be done for 'all'.
+
+=== MAKE DEPENDENCY FILES ===
+build/make/main.o: src/main.c include/math_ops.h
+include/math_ops.h:
+build/make/math_ops.o: src/math_ops.c include/math_ops.h
+include/math_ops.h:
+
+=== MAKE PROGRAM OUTPUT ===
+add: 14
+multiply: 48
+
+=== CMAKE DEBUG BUILD ===
+ninja: no work to do.
+
+=== CMAKE DEBUG OUTPUT ===
+add: 14
+multiply: 48
+
+=== CMAKE RELEASE BUILD ===
+ninja: no work to do.
+
+=== CMAKE RELEASE OUTPUT ===
+add: 14
+multiply: 48
+
+=== BUILD ARTIFACTS ===
+build/manual/build_demo:        ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=366b2c0e782e22b457354ba3fc7cb7ea9e10b9ed, for GNU/Linux 3.2.0, not stripped
+build/make/build_demo:          ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=dbe2d2868a4b3326e6c1101f5c8a0c7e55e865f9, for GNU/Linux 3.2.0, with debug_info, not stripped
+build/cmake-debug/build_demo:   ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=98bc40d84f320aa49f1a60192d03cf9e6a69d733, for GNU/Linux 3.2.0, with debug_info, not stripped
+build/cmake-release/build_demo: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=9c6aec37430704f28a1b30d87daa5dd6e946a31f, for GNU/Linux 3.2.0, not stripped
+
+=== VALIDATION RESULT ===
+PASS
