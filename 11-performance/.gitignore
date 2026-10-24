@@ -1,0 +1,8 @@
+**/build/
+**/workspace/
+*.tmp
+*.out
+*.log
+perf.data
+perf.data.old
+.DS_Store

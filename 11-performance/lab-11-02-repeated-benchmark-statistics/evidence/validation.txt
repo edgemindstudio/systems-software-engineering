@@ -1,0 +1,24 @@
+=== LAB 11-02 VALIDATION ===
+Sat Oct 24 02:58:26 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 src/main.c -o build/stats_demo
+
+=== PROGRAM OUTPUT ===
+trial_1_seconds=0.004100891
+trial_2_seconds=0.004080279
+trial_3_seconds=0.004143483
+trial_4_seconds=0.004111350
+trial_5_seconds=0.004085432
+trial_6_seconds=0.004080659
+trial_7_seconds=0.004084839
+min_seconds=0.004080279
+mean_seconds=0.004098133
+max_seconds=0.004143483
+combined_sink=16788560301872569859
+statistics_order_valid=yes
+repeated_statistics_verified=yes
+
+=== RESULT ===
+PASS

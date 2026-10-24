@@ -1,0 +1,16 @@
+=== LAB 11-01 VALIDATION ===
+Sat Oct 24 02:58:25 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 src/main.c -o build/timing_demo
+
+=== PROGRAM OUTPUT ===
+iterations=20000000
+sink=202067755460992
+elapsed_seconds=0.030277435
+monotonic_elapsed_positive=yes
+monotonic_timing_verified=yes
+
+=== RESULT ===
+PASS

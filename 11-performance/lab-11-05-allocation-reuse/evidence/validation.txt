@@ -1,0 +1,17 @@
+=== LAB 11-05 VALIDATION ===
+Sat Oct 24 02:58:29 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 src/main.c -o build/allocation_demo
+
+=== PROGRAM OUTPUT ===
+iterations=500000
+repeated_alloc_seconds=0.002281429
+reused_alloc_seconds=0.000106719
+sink_equal=yes
+allocation_reuse_ratio=21.378
+allocation_reuse_measurement_verified=yes
+
+=== RESULT ===
+PASS

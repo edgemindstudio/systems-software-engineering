@@ -1,0 +1,23 @@
+=== LAB 11-06 VALIDATION ===
+Sat Oct 24 02:58:29 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/optimization_o0
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 src/main.c -o build/optimization_o2
+
+=== O0 OUTPUT ===
+iterations=80000000
+result=3851012319523133344
+elapsed_seconds=0.039192705
+
+=== O2 OUTPUT ===
+iterations=80000000
+result=3851012319523133344
+elapsed_seconds=0.025058530
+results_equal=yes
+o0_to_o2_ratio=1.564
+optimization_comparison_verified=yes
+
+=== RESULT ===
+PASS

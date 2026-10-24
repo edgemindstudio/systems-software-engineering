@@ -1,0 +1,17 @@
+=== LAB 11-04 VALIDATION ===
+Sat Oct 24 02:58:26 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 src/main.c -o build/syscall_demo
+
+=== PROGRAM OUTPUT ===
+total_bytes=33554432
+one_byte_seconds=2.704782264
+four_kib_seconds=0.000635290
+small_to_large_ratio=4257.555
+same_total_bytes=yes
+syscall_amortization_measurement_verified=yes
+
+=== RESULT ===
+PASS

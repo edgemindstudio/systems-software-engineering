@@ -1,0 +1,18 @@
+=== LAB 11-03 VALIDATION ===
+Sat Oct 24 02:58:26 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 src/main.c -o build/cache_demo
+
+=== PROGRAM OUTPUT ===
+row_major_seconds=0.000812163
+column_major_seconds=0.011290243
+row_sum=534773760
+column_sum=534773760
+sums_equal=yes
+column_to_row_ratio=13.901
+cache_locality_measurement_verified=yes
+
+=== RESULT ===
+PASS
