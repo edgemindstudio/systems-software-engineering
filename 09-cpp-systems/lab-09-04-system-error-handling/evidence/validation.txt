@@ -1,0 +1,16 @@
+=== LAB 09-04 VALIDATION ===
+Sat Oct 24 09:53:42 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang++ -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual -g -O0 src/main.cpp -o build/system_error_demo
+
+=== PROGRAM OUTPUT ===
+good_open_fd_nonnegative=yes
+bad_open_caught_system_error=yes
+error_value=2
+exception_path_survived=yes
+system_error_path_verified=yes
+
+=== RESULT ===
+PASS

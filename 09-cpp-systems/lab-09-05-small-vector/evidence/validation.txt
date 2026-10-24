@@ -1,0 +1,18 @@
+=== LAB 09-05 VALIDATION ===
+Sat Oct 24 09:53:42 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang++ -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual -g -O0 src/main.cpp -o build/small_vector_demo
+
+=== PROGRAM OUTPUT ===
+size=10
+capacity=16
+first=10
+last=100
+bounds_exception_caught=yes
+container_invariants_verified=yes
+small_vector_verified=yes
+
+=== RESULT ===
+PASS

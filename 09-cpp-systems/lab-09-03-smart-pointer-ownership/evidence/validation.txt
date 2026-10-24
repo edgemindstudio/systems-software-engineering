@@ -1,0 +1,22 @@
+=== LAB 09-03 VALIDATION ===
+Sat Oct 24 09:53:41 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang++ -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual -g -O0 src/main.cpp -o build/smart_pointer_demo
+
+=== PROGRAM OUTPUT ===
+resource_constructed=unique
+unique_name=unique
+resource_destroyed=unique
+resource_constructed=shared
+shared_use_count_initial=1
+shared_use_count_nested=2
+shared_use_count_after_nested=1
+weak_expired_inside=no
+resource_destroyed=shared
+weak_expired_after_owner_scope=yes
+smart_pointer_lifetime_verified=yes
+
+=== RESULT ===
+PASS

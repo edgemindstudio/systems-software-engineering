@@ -1,0 +1,15 @@
+=== LAB 09-02 VALIDATION ===
+Sat Oct 24 09:53:41 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang++ -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual -g -O0 src/main.cpp -o build/move_demo
+
+=== PROGRAM OUTPUT ===
+source_empty_after_move=yes
+destination_size=4
+destination_values=11,22,33,44
+move_ownership_transfer_verified=yes
+
+=== RESULT ===
+PASS

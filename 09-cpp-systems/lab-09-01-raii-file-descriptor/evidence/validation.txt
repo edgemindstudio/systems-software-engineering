@@ -1,0 +1,14 @@
+=== LAB 09-01 VALIDATION ===
+Sat Oct 24 09:53:40 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang++ -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual -g -O0 src/main.cpp -o build/raii_fd_demo
+
+=== PROGRAM OUTPUT ===
+fd_valid_inside_scope=yes
+raw_fd_closed_after_scope=yes
+raii_fd_cleanup_verified=yes
+
+=== RESULT ===
+PASS
