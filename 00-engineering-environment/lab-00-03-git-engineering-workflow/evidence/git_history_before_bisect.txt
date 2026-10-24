@@ -1,0 +1,37 @@
+=== Repository status ===
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+=== Branches ===
+  feature/help-text    058e09c Improve counter usage help
+  feature/output-label 3c70b6e Add optional labeled counter output
+  feature/short-label  1f6fac8 Add short label option
+* main                 8bb49a1 Revert "Reapply "Optimize counter loop boundary""
+
+=== Tags ===
+v1.0.0          Stable counter service baseline
+
+=== History ===
+* 8bb49a1 (HEAD -> main, tag: v1.0.0) Revert "Reapply "Optimize counter loop boundary""
+* 937538f Reapply "Optimize counter loop boundary"
+* a2ea923 Revert "Optimize counter loop boundary"
+* e76c01b Optimize counter loop boundary
+*   f154a22 Merge feature/short-label
+|\  
+| * 1f6fac8 (feature/short-label) Add short label option
+* |   90b215b Merge feature/help-text
+|\ \  
+| |/  
+|/|   
+| * 058e09c (feature/help-text) Improve counter usage help
+|/  
+*   48f1a7a Merge feature/output-label
+|\  
+| * 3c70b6e (feature/output-label) Add optional labeled counter output
+|/  
+* fb1595e Establish counter service baseline

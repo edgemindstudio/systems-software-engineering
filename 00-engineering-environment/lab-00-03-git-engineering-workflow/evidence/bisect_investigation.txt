@@ -1,0 +1,20 @@
+=== Bisect result ===
+git bisect start
+# status: waiting for both good and bad commits
+# bad: [318070a161412c7c8494aecc13f049674ef37f1e] Ignore editor swap files
+git bisect bad 318070a161412c7c8494aecc13f049674ef37f1e
+# status: waiting for good commit(s), bad commit known
+# good: [8bb49a1570df2d7e9f949c966f16f0d432d2c935] Revert "Reapply "Optimize counter loop boundary""
+git bisect good 8bb49a1570df2d7e9f949c966f16f0d432d2c935
+# good: [e8ba1481b45d1a308399538756baf187409f5c3d] Clarify counter build artifact ignore rule
+git bisect good e8ba1481b45d1a308399538756baf187409f5c3d
+# bad: [8d9e22c5f147eeccb99462554fd23b1b1f99a7d6] Document test workflow
+git bisect bad 8d9e22c5f147eeccb99462554fd23b1b1f99a7d6
+# bad: [42221a9af36d111b070967a0077f6bc36262b174] Simplify counter iteration boundary
+git bisect bad 42221a9af36d111b070967a0077f6bc36262b174
+# first bad commit: [42221a9af36d111b070967a0077f6bc36262b174] Simplify counter iteration boundary
+
+=== Current bisect commit ===
+42221a9 Simplify counter iteration boundary
+ src/counter.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
