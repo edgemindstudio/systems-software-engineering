@@ -1,0 +1,41 @@
+=== LAB 10-02 VALIDATION ===
+Sat Oct 24 10:22:02 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/lldb_crash_demo
+
+=== LLDB BATCH ANALYSIS ===
+(lldb) target create "./build/lldb_crash_demo"
+Current executable set to '/home/fonke/systems-software-engineering/10-debugging/lab-10-02-lldb-crash-analysis/build/lldb_crash_demo' (x86_64).
+(lldb) settings set target.disable-aslr false
+(lldb) run
+lldb_fault_expected=yes
+Process 12510 launched: '/home/fonke/systems-software-engineering/10-debugging/lab-10-02-lldb-crash-analysis/build/lldb_crash_demo' (x86_64)
+Process 12510 stopped
+* thread #1, name = 'lldb_crash_demo', stop reason = signal SIGSEGV: address not mapped to object (fault address=0x0)
+    frame #0: 0x00005dd95b7351a0 lldb_crash_demo`trigger_fault at main.c:6:10
+   3   	static void trigger_fault(void)
+   4   	{
+   5   	    volatile int *ptr = NULL;
+-> 6   	    *ptr = 42;
+    	         ^
+   7   	}
+   8   	
+   9   	int main(void)
+Likely cause: ptr accessed 0x0
+(lldb) bt
+* thread #1, name = 'lldb_crash_demo', stop reason = signal SIGSEGV: address not mapped to object (fault address=0x0)
+  * frame #0: 0x00005dd95b7351a0 lldb_crash_demo`trigger_fault at main.c:6:10
+    frame #1: 0x00005dd95b73517f lldb_crash_demo`main at main.c:13:5
+    frame #2: 0x000075dc7131ef75 libc.so.6`__libc_start_call_main(main=(lldb_crash_demo`main at main.c:10), argc=1, argv=0x00007ffd14ffd6e8) at libc_start_call_main.h:58:16
+    frame #3: 0x000075dc7131f027 libc.so.6`__libc_start_main_impl(main=(lldb_crash_demo`main at main.c:10), argc=1, argv=0x00007ffd14ffd6e8, init=<unavailable>, fini=<unavailable>, rtld_fini=<unavailable>, stack_end=0x00007ffd14ffd6d8) at libc-start.c:360:3
+    frame #4: 0x00005dd95b735081 lldb_crash_demo`_start + 33
+(lldb) process kill
+Process 12510 exited with status = 9 (0x00000009) killed
+lldb_return_code=124
+lldb_wsl_batch_timeout_after_diagnostic=yes
+lldb_crash_backtrace_verified=yes
+
+=== RESULT ===
+PASS

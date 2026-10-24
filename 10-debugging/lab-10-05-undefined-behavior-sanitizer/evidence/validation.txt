@@ -1,0 +1,15 @@
+=== LAB 10-05 VALIDATION ===
+Sat Oct 24 10:22:18 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -fsanitize=undefined -fno-sanitize-recover=undefined src/main.c -o build/ubsan_demo
+
+=== UNDEFINEDBEHAVIORSANITIZER ===
+src/main.c:7:33: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior src/main.c:7:33 
+ubsan_return_code=1
+ubsan_signed_overflow_verified=yes
+
+=== RESULT ===
+PASS

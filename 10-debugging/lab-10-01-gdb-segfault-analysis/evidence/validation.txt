@@ -1,0 +1,22 @@
+=== LAB 10-01 VALIDATION ===
+Sat Oct 24 10:22:02 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/gdb_crash_demo
+
+=== GDB BATCH ANALYSIS ===
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/usr/lib/x86_64-linux-gnu/libthread_db.so.1".
+about_to_crash=yes
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00005555555551ac in crash_here (ptr=0x0) at src/main.c:5
+5	    return *ptr;
+#0  0x00005555555551ac in crash_here (ptr=0x0) at src/main.c:5
+#1  0x000055555555518d in main () at src/main.c:13
+gdb_return_code=0
+gdb_segfault_backtrace_verified=yes
+
+=== RESULT ===
+PASS

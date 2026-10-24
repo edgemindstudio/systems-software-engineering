@@ -1,0 +1,16 @@
+=== LAB 10-06 VALIDATION ===
+Sat Oct 24 10:22:18 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/assert_demo
+
+=== PROGRAM OUTPUT ===
+assert_demo: src/main.c:9: int divide_positive(int, int): Assertion `denominator > 0' failed.
+child_signaled=yes
+signal=6
+assertion_failure_isolated=yes
+assert_invariant_verified=yes
+
+=== RESULT ===
+PASS

@@ -1,0 +1,9 @@
+**/build/
+**/workspace/
+*.tmp
+*.out
+*.log
+core
+core.*
+vgcore.*
+.DS_Store
