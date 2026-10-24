@@ -1,0 +1,43 @@
+=== LAB 07-06 VALIDATION ===
+Sat Oct 24 09:35:09 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -pthread src/main.c -o build/race_demo
+
+=== NORMAL PROGRAM OUTPUT ===
+expected=400000
+observed=156918
+intentional_race_present=yes
+
+=== THREADSANITIZER ATTEMPT ===
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -pthread -fsanitize=thread src/main.c -o build/race_demo_tsan
+==================
+WARNING: ThreadSanitizer: data race (pid=10071)
+  Write of size 8 at 0x5555569eb718 by thread T3:
+    #0 worker /home/fonke/systems-software-engineering/07-concurrency/lab-07-06-race-detection/src/main.c:13:9 (race_demo_tsan+0xea4c7) (BuildId: d652e3a5c4a0665c53870bda4706e6718ccb3676)
+
+  Previous write of size 8 at 0x5555569eb718 by thread T1:
+    #0 worker /home/fonke/systems-software-engineering/07-concurrency/lab-07-06-race-detection/src/main.c:13:9 (race_demo_tsan+0xea4c7) (BuildId: d652e3a5c4a0665c53870bda4706e6718ccb3676)
+
+  Location is global 'counter' of size 8 at 0x5555569eb718 (race_demo_tsan+0x1497718)
+
+  Thread T3 (tid=10075, running) created by main thread at:
+    #0 pthread_create <null> (race_demo_tsan+0x655ce) (BuildId: d652e3a5c4a0665c53870bda4706e6718ccb3676)
+    #1 main /home/fonke/systems-software-engineering/07-concurrency/lab-07-06-race-detection/src/main.c:24:13 (race_demo_tsan+0xea3a6) (BuildId: d652e3a5c4a0665c53870bda4706e6718ccb3676)
+
+  Thread T1 (tid=10073, finished) created by main thread at:
+    #0 pthread_create <null> (race_demo_tsan+0x655ce) (BuildId: d652e3a5c4a0665c53870bda4706e6718ccb3676)
+    #1 main /home/fonke/systems-software-engineering/07-concurrency/lab-07-06-race-detection/src/main.c:24:13 (race_demo_tsan+0xea3a6) (BuildId: d652e3a5c4a0665c53870bda4706e6718ccb3676)
+
+SUMMARY: ThreadSanitizer: data race /home/fonke/systems-software-engineering/07-concurrency/lab-07-06-race-detection/src/main.c:13:9 in worker
+==================
+ThreadSanitizer: reported 1 warnings
+expected=400000
+observed=229557
+intentional_race_present=yes
+tsan_data_race_detected=yes
+intentional_race_source_verified=yes
+
+=== RESULT ===
+PASS

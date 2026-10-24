@@ -1,0 +1,17 @@
+=== LAB 07-08 VALIDATION ===
+Sat Oct 24 09:35:09 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -pthread src/main.c -o build/worker_pool_demo
+
+=== PROGRAM OUTPUT ===
+tasks_submitted=40
+tasks_completed=40
+expected_sum=22140
+actual_sum=22140
+worker_pool_correct=yes
+worker_pool_shutdown_verified=yes
+
+=== RESULT ===
+PASS

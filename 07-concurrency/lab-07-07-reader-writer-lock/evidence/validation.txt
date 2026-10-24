@@ -1,0 +1,15 @@
+=== LAB 07-07 VALIDATION ===
+Sat Oct 24 09:35:09 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -pthread src/main.c -o build/rwlock_demo
+
+=== PROGRAM OUTPUT ===
+final_value=1000
+expected_final=1000
+rwlock_writer_correct=yes
+rwlock_shared_state_verified=yes
+
+=== RESULT ===
+PASS
