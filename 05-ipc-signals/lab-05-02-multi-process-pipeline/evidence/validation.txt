@@ -1,0 +1,125 @@
+=== LAB 05-02 VALIDATION ===
+Sat Oct 24 09:09:51 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/pipeline_demo
+
+=== PIPELINE OUTPUT ===
+      2 alpha
+      1 beta
+
+=== ASSERTIONS ===
+pipeline_counts_verified=yes
+
+=== STRACE PROCESS/DESCRIPTORS ===
+execve("./build/pipeline_demo", ["./build/pipeline_demo"], 0x7ffd8d10cab8 /* 34 vars */) = 0
+close(3)                                = 0
+close(3)                                = 0
+pipe2([3, 4], 0)                        = 0
+pipe2([5, 6], 0)                        = 0
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLDstrace: Process 8860 attached
+[pid  8859] clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLDstrace: Process 8861 attached
+[pid  8860] dup2(3, 0 <unfinished ...>
+[pid  8859] <... clone resumed>, child_tidptr=0x79b3e8566a10) = 8861
+[pid  8860] <... dup2 resumed>)         = 0
+[pid  8860] dup2(6, 1)                  = 1
+[pid  8859] close(3 <unfinished ...>
+[pid  8860] close(3 <unfinished ...>
+[pid  8859] <... close resumed>)        = 0
+[pid  8861] dup2(5, 0 <unfinished ...>
+[pid  8859] close(5 <unfinished ...>
+[pid  8860] <... close resumed>)        = 0
+[pid  8859] <... close resumed>)        = 0
+[pid  8861] <... dup2 resumed>)         = 0
+[pid  8859] close(6 <unfinished ...>
+[pid  8860] close(4 <unfinished ...>
+[pid  8859] <... close resumed>)        = 0
+[pid  8861] close(3 <unfinished ...>
+[pid  8860] <... close resumed>)        = 0
+[pid  8861] <... close resumed>)        = 0
+[pid  8860] close(5 <unfinished ...>
+[pid  8859] close(4 <unfinished ...>
+[pid  8861] close(4 <unfinished ...>
+[pid  8859] <... close resumed>)        = 0
+[pid  8860] <... close resumed>)        = 0
+[pid  8859] wait4(8860 <unfinished ...>
+[pid  8861] <... close resumed>)        = 0
+[pid  8860] close(6 <unfinished ...>
+[pid  8861] close(5 <unfinished ...>
+[pid  8860] <... close resumed>)        = 0
+[pid  8861] <... close resumed>)        = 0
+[pid  8860] execve("/home/fonke/.local/bin/sort", ["sort"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8861] close(6)                    = 0
+[pid  8860] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8861] execve("/home/fonke/.local/bin/uniq", ["uniq", "-c"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8860] execve("/usr/local/sbin/sort", ["sort"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8861] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8860] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8861] execve("/usr/local/sbin/uniq", ["uniq", "-c"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8860] execve("/usr/local/bin/sort", ["sort"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8861] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8860] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8861] execve("/usr/local/bin/uniq", ["uniq", "-c"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8860] execve("/usr/sbin/sort", ["sort"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8861] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8860] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8861] execve("/usr/sbin/uniq", ["uniq", "-c"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8860] execve("/usr/bin/sort", ["sort"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8861] <... execve resumed>)       = -1 ENOENT (No such file or directory)
+[pid  8861] execve("/usr/bin/uniq", ["uniq", "-c"], 0x7ffd34010f18 /* 34 vars */ <unfinished ...>
+[pid  8860] <... execve resumed>)       = 0
+[pid  8861] <... execve resumed>)       = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3 <unfinished ...>
+[pid  8860] close(3 <unfinished ...>
+[pid  8861] <... close resumed>)        = 0
+[pid  8860] <... close resumed>)        = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8861] close(3)                    = 0
+[pid  8860] close(3 <unfinished ...>
+[pid  8861] close(3 <unfinished ...>
+[pid  8860] <... close resumed>)        = 0
+[pid  8861] <... close resumed>)        = 0
+[pid  8861] close(3 <unfinished ...>
+[pid  8860] close(3 <unfinished ...>
+[pid  8861] <... close resumed>)        = 0
+[pid  8860] <... close resumed>)        = 0
+[pid  8860] close(3)                    = 0
+[pid  8860] close(3)                    = 0
+[pid  8860] close(0)                    = 0
+[pid  8860] close(1)                    = 0
+[pid  8860] close(2)                    = 0
+[pid  8861] close(0 <unfinished ...>
+[pid  8861] <... close resumed>)        = 0
+[pid  8861] close(1 <unfinished ...>
+[pid  8859] <... wait4 resumed>, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 8860
+[pid  8861] <... close resumed>)        = 0
+[pid  8861] close(2 <unfinished ...>
+[pid  8859] wait4(8861 <unfinished ...>
+[pid  8861] <... close resumed>)        = 0
+<... wait4 resumed>, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 8861
+
+=== RESULT ===
+PASS

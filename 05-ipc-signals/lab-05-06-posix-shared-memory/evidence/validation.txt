@@ -1,0 +1,19 @@
+=== LAB 05-06 VALIDATION ===
+Sat Oct 24 09:09:52 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/shm_demo
+
+=== PROGRAM OUTPUT ===
+shared_ready=1
+shared_value=2026
+shared_message=shared-memory-visible
+shared_memory_unlinked=yes
+
+=== ASSERTIONS ===
+shared_memory_visibility_verified=yes
+shared_memory_cleanup_verified=yes
+
+=== RESULT ===
+PASS

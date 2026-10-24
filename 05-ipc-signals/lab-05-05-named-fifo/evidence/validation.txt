@@ -1,0 +1,16 @@
+=== LAB 05-05 VALIDATION ===
+Sat Oct 24 09:09:52 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/fifo_demo
+
+=== PROGRAM OUTPUT ===
+reader_received=fifo-message
+fifo_type_verified=yes
+
+=== ASSERTIONS ===
+fifo_delivery_and_cleanup_verified=yes
+
+=== RESULT ===
+PASS
