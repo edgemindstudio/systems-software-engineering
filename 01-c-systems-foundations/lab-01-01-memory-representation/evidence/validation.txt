@@ -1,0 +1,44 @@
+=== VALIDATION ===
+Sat Oct 24 04:55:58 AM CDT 2026
+
+=== COMPILER ===
+Debian clang version 21.1.8 (7+b1)
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/memory_representation.c -o build/memory_representation.o
+clang build/main.o build/memory_representation.o -o build/lab
+
+=== PROGRAM OUTPUT ===
+value: 0x01020304
+bytes: 04 03 02 01
+byte order: little-endian
+sizeof(uint32_t): 4
+sizeof(layout_probe): 12
+alignof(layout_probe): 4
+offset(tag): 0
+offset(value): 4
+offset(code): 8
+
+=== TESTS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP tests/test_memory_representation.c build/memory_representation.o -o build/tests
+./build/tests
+
+=== SANITIZERS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer src/main.c src/memory_representation.c -o build/sanitize/lab
+./build/sanitize/lab
+value: 0x01020304
+bytes: 04 03 02 01
+byte order: little-endian
+sizeof(uint32_t): 4
+sizeof(layout_probe): 12
+alignof(layout_probe): 4
+offset(tag): 0
+offset(value): 4
+offset(code): 8
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer tests/test_memory_representation.c src/memory_representation.c -o build/sanitize/tests
+./build/sanitize/tests
+
+=== RESULT ===
+PASS

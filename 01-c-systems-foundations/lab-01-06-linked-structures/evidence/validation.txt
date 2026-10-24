@@ -1,0 +1,28 @@
+=== VALIDATION ===
+Sat Oct 24 04:56:07 AM CDT 2026
+
+=== COMPILER ===
+Debian clang version 21.1.8 (7+b1)
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/int_list.c -o build/int_list.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/main.c -o build/main.o
+clang build/int_list.o build/main.o -o build/lab
+
+=== PROGRAM OUTPUT ===
+size=3 values: 5 10 30
+
+=== TESTS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP tests/test_int_list.c build/int_list.o -o build/tests
+./build/tests
+
+=== SANITIZERS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer src/int_list.c src/main.c -o build/sanitize/lab
+./build/sanitize/lab
+size=3 values: 5 10 30
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer tests/test_int_list.c src/int_list.c -o build/sanitize/tests
+./build/sanitize/tests
+
+=== RESULT ===
+PASS

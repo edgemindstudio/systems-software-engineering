@@ -1,0 +1,32 @@
+=== VALIDATION ===
+Sat Oct 24 04:56:00 AM CDT 2026
+
+=== COMPILER ===
+Debian clang version 21.1.8 (7+b1)
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/pointer_ops.c -o build/pointer_ops.o
+clang build/main.o build/pointer_ops.o -o build/lab
+
+=== PROGRAM OUTPUT ===
+sum: 30
+found: 6 at index 2
+reversed: 10 8 7 4 2
+
+=== TESTS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP tests/test_pointer_ops.c build/pointer_ops.o -o build/tests
+./build/tests
+
+=== SANITIZERS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer src/main.c src/pointer_ops.c -o build/sanitize/lab
+./build/sanitize/lab
+sum: 30
+found: 6 at index 2
+reversed: 10 8 7 4 2
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer tests/test_pointer_ops.c src/pointer_ops.c -o build/sanitize/tests
+./build/sanitize/tests
+
+=== RESULT ===
+PASS

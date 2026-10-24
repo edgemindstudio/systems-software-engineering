@@ -1,0 +1,42 @@
+=== VALIDATION ===
+Sat Oct 24 04:56:02 AM CDT 2026
+
+=== COMPILER ===
+Debian clang version 21.1.8 (7+b1)
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/stack_probe.c -o build/stack_probe.o
+clang build/main.o build/stack_probe.o -o build/lab
+
+=== PROGRAM OUTPUT ===
+depth 0 address 0x7ffdc889d5a4
+depth 1 address 0x7ffdc889d574
+depth 2 address 0x7ffdc889d544
+depth 3 address 0x7ffdc889d514
+depth 4 address 0x7ffdc889d4e4
+depth 5 address 0x7ffdc889d4b4
+distinct active-frame locals: yes
+observed address trend: decreasing
+
+=== TESTS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP tests/test_stack_probe.c build/stack_probe.o -o build/tests
+./build/tests
+
+=== SANITIZERS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer src/main.c src/stack_probe.c -o build/sanitize/lab
+./build/sanitize/lab
+depth 0 address 0x79c1e21de020
+depth 1 address 0x79c1e21de060
+depth 2 address 0x79c1e21de0a0
+depth 3 address 0x79c1e21de0e0
+depth 4 address 0x79c1e21de120
+depth 5 address 0x79c1e21de160
+distinct active-frame locals: yes
+observed address trend: increasing
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -fsanitize=address,undefined -fno-omit-frame-pointer tests/test_stack_probe.c src/stack_probe.c -o build/sanitize/tests
+./build/sanitize/tests
+
+=== RESULT ===
+PASS

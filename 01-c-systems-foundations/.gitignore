@@ -1,0 +1,13 @@
+# Build artifacts
+**/build/
+**/*.o
+**/*.d
+
+# Runtime output
+**/*.log
+**/*.tmp
+
+# Editor / OS files
+*.swp
+*.swo
+.DS_Store
