@@ -1,0 +1,16 @@
+=== LAB 06-02 VALIDATION ===
+Sat Oct 24 09:22:01 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_GNU_SOURCE -g -O0 src/main.c -o build/anonymous_mmap_demo
+
+=== PROGRAM OUTPUT ===
+page_size=4096
+mapping_length=8192
+message=anonymous-mapping-ok
+munmap_success=yes
+anonymous_mapping_lifecycle_verified=yes
+
+=== RESULT ===
+PASS

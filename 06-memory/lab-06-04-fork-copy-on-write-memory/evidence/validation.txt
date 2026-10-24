@@ -1,0 +1,16 @@
+=== LAB 06-04 VALIDATION ===
+Sat Oct 24 09:22:01 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_GNU_SOURCE -g -O0 src/main.c -o build/cow_demo
+
+=== PROGRAM OUTPUT ===
+child_value=200
+parent_value_after_child_write=100
+parent_value_after_parent_write=300
+child_exit_success=yes
+post_fork_memory_isolation_verified=yes
+
+=== RESULT ===
+PASS

@@ -1,0 +1,16 @@
+=== LAB 06-03 VALIDATION ===
+Sat Oct 24 09:22:01 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_GNU_SOURCE -g -O0 src/main.c -o build/guard_page_demo
+
+=== PROGRAM OUTPUT ===
+first_page_value=90
+guard_child_signaled=yes
+guard_signal=11
+expected_sigsegv=yes
+guard_page_fault_verified=yes
+
+=== RESULT ===
+PASS

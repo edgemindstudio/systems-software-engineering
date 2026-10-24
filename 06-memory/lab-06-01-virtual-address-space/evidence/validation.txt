@@ -1,0 +1,32 @@
+=== LAB 06-01 VALIDATION ===
+Sat Oct 24 09:22:01 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_GNU_SOURCE -g -O0 src/main.c -o build/address_space_demo
+
+=== PROGRAM OUTPUT ===
+pid=9368
+code=0x558c5ba20270
+global=0x558c5ba23038
+heap=0x558c90e91310
+stack=0x7ffdd7b74528
+values=7,13,11
+
+=== PROC MAPS SNAPSHOT ===
+pid=9369
+code=0x5a0d4d3d7270
+global=0x5a0d4d3da038
+heap=0x5a0d5d39e310
+stack=0x7ffc36b255d8
+values=7,13,11
+5f3311aba000-5f3311b94000 r-xp 00031000 08:50 1410                       /usr/bin/bash
+5f333cc5a000-5f333cc7b000 rw-p 00000000 00:00 0                          [heap]
+7f10bc401000-7f10bc569000 r-xp 00028000 08:50 23050                      /usr/lib/x86_64-linux-gnu/libc.so.6
+7f10bc5de000-7f10bc5f2000 r-xp 0000f000 08:50 21778                      /usr/lib/x86_64-linux-gnu/libtinfo.so.6.6
+7f10bc61d000-7f10bc645000 r-xp 00001000 08:50 23060                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffd5edac000-7ffd5edce000 rw-p 00000000 00:00 0                          [stack]
+7ffd5ede1000-7ffd5ede3000 r-xp 00000000 00:00 0                          [vdso]
+
+=== RESULT ===
+PASS

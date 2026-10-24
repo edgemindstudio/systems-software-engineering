@@ -1,0 +1,15 @@
+=== LAB 06-07 VALIDATION ===
+Sat Oct 24 09:22:01 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_GNU_SOURCE -g -O0 src/main.c -o build/rlimit_demo
+
+=== PROGRAM OUTPUT ===
+allocation_failed_under_limit=yes
+child_exit_status=0
+controlled_failure_verified=yes
+rlimit_allocation_failure_verified=yes
+
+=== RESULT ===
+PASS

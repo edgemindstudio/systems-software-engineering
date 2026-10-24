@@ -1,0 +1,17 @@
+=== LAB 06-05 VALIDATION ===
+Sat Oct 24 09:22:01 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_GNU_SOURCE -g -O0 src/main.c -o build/residency_demo
+
+=== PROGRAM OUTPUT ===
+resident_before=0
+resident_after=64
+minor_fault_delta=64
+pages_touched=64
+all_pages_resident_after_touch=yes
+minor_faults_observed=yes
+
+=== RESULT ===
+PASS
