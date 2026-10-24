@@ -1,0 +1,28 @@
+=== LAB 04-02 VALIDATION ===
+Sat Oct 24 05:38:43 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/launcher.c -o build/exec_launcher
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/target.c -o build/exec_target
+
+=== PROGRAM OUTPUT ===
+pre_exec_pid=7868
+post_exec_pid=7868
+argc=3
+argv1=alpha
+argv2=beta
+env_token=exec-preserved-env
+
+=== ASSERTIONS ===
+pid_preserved_across_exec=yes
+
+=== STRACE EXEC ===
+execve("./build/exec_launcher", ["./build/exec_launcher"], 0x7ffcd9f757c8 /* 34 vars */) = 0
+clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLDstrace: Process 7881 attached
+[pid  7880] wait4(7881pre_exec_pid=7881
+[pid  7881] execve("./build/exec_target", ["exec_target", "alpha", "beta"], 0x5a957d428310 /* 35 vars */) = 0
+<... wait4 resumed>, [{WIFEXITED(s) && WEXITSTATUS(s) == 0}], 0, NULL) = 7881
+
+=== RESULT ===
+PASS

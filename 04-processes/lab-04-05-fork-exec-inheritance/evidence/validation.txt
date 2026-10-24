@@ -1,0 +1,20 @@
+=== LAB 04-05 VALIDATION ===
+Sat Oct 24 05:38:45 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/launcher.c -o build/inherit_launcher
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/target.c -o build/inherit_target
+
+=== PROGRAM OUTPUT ===
+cwd=/home/fonke/systems-software-engineering/04-processes/lab-04-05-fork-exec-inheritance
+env_token=visible-after-exec
+inherited_fd_open=yes
+cloexec_fd_open=no
+
+=== ASSERTIONS ===
+cwd_environment_fd_inheritance_verified=yes
+cloexec_verified=yes
+
+=== RESULT ===
+PASS

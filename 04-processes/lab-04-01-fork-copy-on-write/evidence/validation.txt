@@ -1,0 +1,17 @@
+=== LAB 04-01 VALIDATION ===
+Sat Oct 24 05:38:43 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/fork_demo
+
+=== PROGRAM OUTPUT ===
+before_fork pid=7846 value=41
+child pid=7847 ppid=7846 value=42
+parent pid=7846 child=7847 value=141
+
+=== ASSERTIONS ===
+independent_post_fork_values=yes
+
+=== RESULT ===
+PASS

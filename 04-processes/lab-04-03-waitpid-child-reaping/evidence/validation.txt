@@ -1,0 +1,20 @@
+=== LAB 04-03 VALIDATION ===
+Sat Oct 24 05:38:44 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/reap_demo
+
+=== PROGRAM OUTPUT ===
+child index=0 pid=7896 exit=11
+child index=1 pid=7897 exit=22
+child index=2 pid=7898 exit=33
+reaped pid=7896 exit=11
+reaped pid=7897 exit=22
+reaped pid=7898 exit=33
+
+=== ASSERTIONS ===
+three_children_reaped=yes
+
+=== RESULT ===
+PASS

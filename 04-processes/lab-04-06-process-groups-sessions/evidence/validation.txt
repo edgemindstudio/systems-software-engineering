@@ -1,0 +1,18 @@
+=== LAB 04-06 VALIDATION ===
+Sat Oct 24 05:38:45 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/group_session_demo
+
+=== PROGRAM OUTPUT ===
+parent pid=7965 ppid=7953 pgid=7831 sid=424
+group_child pid=7966 ppid=7965 pgid=7966 sid=424
+session_child pid=7967 ppid=7965 pgid=7967 sid=7967
+
+=== ASSERTIONS ===
+new_process_group_verified=yes
+new_session_verified=yes
+
+=== RESULT ===
+PASS

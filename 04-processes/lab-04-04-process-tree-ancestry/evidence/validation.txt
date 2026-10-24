@@ -1,0 +1,17 @@
+=== LAB 04-04 VALIDATION ===
+Sat Oct 24 05:38:44 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/tree_demo
+
+=== PROGRAM OUTPUT ===
+root pid=7917 ppid=7905
+child pid=7918 ppid=7917
+grandchild pid=7919 ppid=7918
+
+=== ASSERTIONS ===
+three_generation_ancestry_verified=yes
+
+=== RESULT ===
+PASS
