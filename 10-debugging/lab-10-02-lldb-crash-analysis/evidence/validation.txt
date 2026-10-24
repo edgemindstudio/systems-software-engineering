@@ -21,7 +21,7 @@ Process 12510 stopped
 -> 6   	    *ptr = 42;
     	         ^
    7   	}
-   8   	
+   8
    9   	int main(void)
 Likely cause: ptr accessed 0x0
 (lldb) bt

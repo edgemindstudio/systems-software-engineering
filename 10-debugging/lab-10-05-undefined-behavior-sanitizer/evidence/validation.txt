@@ -7,7 +7,7 @@ clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototype
 
 === UNDEFINEDBEHAVIORSANITIZER ===
 src/main.c:7:33: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'
-SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior src/main.c:7:33 
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior src/main.c:7:33
 ubsan_return_code=1
 ubsan_signed_overflow_verified=yes
 
