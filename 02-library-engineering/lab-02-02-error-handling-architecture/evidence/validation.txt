@@ -1,0 +1,19 @@
+=== LAB 02-02 VALIDATION ===
+Sat Oct 24 05:11:22 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/safe_math.c -o build/safe_math.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/main.c -o build/main.o
+clang build/safe_math.o build/main.o -o build/error_demo
+
+=== PROGRAM OUTPUT ===
+84 / 2 = 42
+expected error: divide_by_zero: denominator must not be zero
+
+=== TESTS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP tests/test_safe_math.c build/safe_math.o -o build/test_safe_math
+./build/test_safe_math
+
+=== RESULT ===
+PASS

@@ -1,0 +1,52 @@
+=== LAB 02-05 VALIDATION ===
+Sat Oct 24 05:11:23 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iv1/include -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -fPIC -c v1/src/record.c -o build/v1/record.o
+clang -shared -Wl,-soname,librecord.so.1 -o build/v1/librecord.so.1.0.0 build/v1/record.o
+ln -sfn librecord.so.1.0.0 build/v1/librecord.so.1
+ln -sfn librecord.so.1 build/v1/librecord.so
+clang -Iv2/include -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -fPIC -c v2/src/record.c -o build/v2/record.o
+clang -shared -Wl,-soname,librecord.so.1 -o build/v2/librecord.so.1.0.0 build/v2/record.o
+ln -sfn librecord.so.1.0.0 build/v2/librecord.so.1
+ln -sfn librecord.so.1 build/v2/librecord.so
+clang -Iv1/include -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 consumer/main.c -Lbuild/v1 -lrecord -o build/bin/record_consumer
+
+=== V1 CLIENT RUN ===
+consumer_struct_size=8
+library_struct_size=8
+score=7042
+
+=== V2 CLIENT RUN (EXPECTED ABI REJECTION) ===
+ABI MISMATCH: public struct layout changed
+consumer_struct_size=8
+library_struct_size=24
+v2_exit_status=2
+
+=== V1 PUBLIC STRUCT SIZE ===
+consumer_compiled_size=8
+
+=== SONAME COMPARISON ===
+ 0x000000000000000e (SONAME)             Library soname: [librecord.so.1]
+ 0x000000000000000e (SONAME)             Library soname: [librecord.so.1]
+
+=== SYMBOL COMPARISON ===
+-- v1 --
+0000000000001100 T record_abi_size
+0000000000001110 T record_score
+-- v2 --
+0000000000001100 T record_abi_size
+0000000000001110 T record_score
+
+=== MAKE TEST ===
+LD_LIBRARY_PATH=build/v1 ./build/bin/record_consumer
+consumer_struct_size=8
+library_struct_size=8
+score=7042
+ABI MISMATCH: public struct layout changed
+consumer_struct_size=8
+library_struct_size=24
+
+=== RESULT ===
+PASS

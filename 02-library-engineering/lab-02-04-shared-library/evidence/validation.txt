@@ -1,0 +1,45 @@
+=== LAB 02-04 VALIDATION ===
+Sat Oct 24 05:11:23 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -fPIC -c src/counter.c -o build/obj/counter.o
+clang -shared -Wl,-soname,libcounter.so.1 -o build/lib/libcounter.so.1.0.0 build/obj/counter.o
+ln -sfn libcounter.so.1.0.0 build/lib/libcounter.so.1
+ln -sfn libcounter.so.1 build/lib/libcounter.so
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 app/main.c -Lbuild/lib -lcounter -Wl,-rpath,'$ORIGIN/../lib' -o build/bin/shared_demo
+
+=== SYMLINKS ===
+total 20
+lrwxrwxrwx 1 fonke fonke    15 Oct 24 05:11 libcounter.so -> libcounter.so.1
+lrwxrwxrwx 1 fonke fonke    19 Oct 24 05:11 libcounter.so.1 -> libcounter.so.1.0.0
+-rwxr-xr-x 1 fonke fonke 17152 Oct 24 05:11 libcounter.so.1.0.0
+
+=== PROGRAM OUTPUT ===
+library_version=1.0.0
+lines=3
+letter_a=5
+
+=== TESTS ===
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 tests/test_counter.c -Lbuild/lib -lcounter -Wl,-rpath,'$ORIGIN/../lib' -o build/bin/test_counter
+./build/bin/test_counter
+
+=== SONAME ===
+ 0x000000000000000e (SONAME)             Library soname: [libcounter.so.1]
+
+=== RUNPATH ===
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN/../lib]
+
+=== EXPORTED SYMBOLS ===
+0000000000001100 T counter_count_char
+0000000000001170 T counter_count_lines
+0000000000001210 T counter_version
+
+=== RUNTIME DEPENDENCIES ===
+	linux-vdso.so.1 (0x00007ffe3ace7000)
+	libcounter.so.1 => /home/fonke/systems-software-engineering/02-library-engineering/lab-02-04-shared-library/build/bin/../lib/libcounter.so.1 (0x0000718aff276000)
+	libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x0000718aff06b000)
+	/lib64/ld-linux-x86-64.so.2 (0x0000718aff282000)
+
+=== RESULT ===
+PASS

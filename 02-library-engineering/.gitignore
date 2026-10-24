@@ -1,0 +1,11 @@
+# Generated build output
+**/build/
+
+# Object/dependency files
+**/*.o
+**/*.d
+
+# Editor/OS files
+*.swp
+*.swo
+.DS_Store

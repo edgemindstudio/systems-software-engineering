@@ -1,0 +1,25 @@
+=== LAB 02-01 VALIDATION ===
+Sat Oct 24 05:11:22 AM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -Iinclude -Isrc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/telemetry.c -o build/telemetry.o
+clang -Iinclude -Isrc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/format_internal.c -o build/format_internal.o
+clang -Iinclude -Isrc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP -c src/main.c -o build/main.o
+clang build/telemetry.o build/format_internal.o build/main.o -o build/telemetry_demo
+
+=== PROGRAM OUTPUT ===
+avg_temp=73.33C peak_rpm=2200
+
+=== TESTS ===
+clang -Iinclude -Isrc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -g -O0 -MMD -MP tests/test_telemetry.c build/telemetry.o build/format_internal.o -o build/test_telemetry
+./build/test_telemetry
+
+=== PUBLIC HEADER ===
+telemetry.h
+
+=== PRIVATE HEADER ===
+format_internal.h
+
+=== RESULT ===
+PASS
