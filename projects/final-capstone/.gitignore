@@ -1,0 +1,7 @@
+build/
+workspace/
+*.o
+*.out
+*.log
+*.tmp
+*.sock
