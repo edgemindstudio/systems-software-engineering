@@ -1,0 +1,68 @@
+========================================
+NETWORK SERVICE VALIDATION
+========================================
+Sat Oct 24 08:36:59 PM CDT 2026
+
+=== TOOLCHAIN ===
+Debian clang version 21.1.8 (7+b1)
+Python 3.13.12
+Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 GNU/Linux
+
+=== STRICT BUILD ===
+rm -rf build workspace
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread -c src/protocol.c -o build/protocol.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread src/server.c build/protocol.o -o build/netservice-server
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread src/client.c build/protocol.o -o build/netservice-client
+
+=== INTEGRATION / CONCURRENCY TESTS ===
+python3 tests/integration.py ./build/netservice-server
+basic_roundtrip=PASS
+fragmented_request=PASS
+concurrent_clients=PASS
+max_frame=PASS
+oversized_frame_rejected=PASS
+graceful_shutdown=PASS
+network_service_tests=PASS
+
+=== REPRESENTATIVE SERVER/CLIENT ===
+response_length=18
+response=network-service-ok
+listening_address=127.0.0.1
+listening_port=40857
+workers=2
+queue_capacity=4
+accepted_connections=1
+completed_connections=1
+protocol_errors=0
+shutdown=graceful
+
+=== ASAN + UBSAN VALIDATION ===
+rm -rf build workspace
+make CFLAGS="-std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -pthread" all
+make[1]: Entering directory '/home/fonke/systems-software-engineering/projects/network-service'
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -pthread -c src/protocol.c -o build/protocol.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -pthread src/server.c build/protocol.o -o build/netservice-server
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -pthread src/client.c build/protocol.o -o build/netservice-client
+make[1]: Leaving directory '/home/fonke/systems-software-engineering/projects/network-service'
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 \
+UBSAN_OPTIONS=halt_on_error=1 \
+python3 tests/integration.py ./build/netservice-server
+basic_roundtrip=PASS
+fragmented_request=PASS
+concurrent_clients=PASS
+max_frame=PASS
+oversized_frame_rejected=PASS
+graceful_shutdown=PASS
+network_service_tests=PASS
+
+=== RESTORE NORMAL BUILD ===
+rm -rf build workspace
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread -c src/protocol.c -o build/protocol.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread src/server.c build/protocol.o -o build/netservice-server
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread src/client.c build/protocol.o -o build/netservice-client
+
+=== RESULT ===
+PASS
