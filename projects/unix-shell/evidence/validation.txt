@@ -1,0 +1,91 @@
+========================================
+UNIX SHELL VALIDATION
+========================================
+Sat Oct 24 08:20:01 PM CDT 2026
+
+=== TOOLCHAIN ===
+Debian clang version 21.1.8 (7+b1)
+Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 GNU/Linux
+
+=== STRICT BUILD ===
+rm -rf build workspace
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/parser.c -o build/parser.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/builtins.c -o build/builtins.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/execute.c -o build/execute.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/util.c -o build/util.o
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 build/main.o build/parser.o build/builtins.o build/execute.o build/util.o -o build/sshell
+
+=== INTEGRATION TESTS ===
+./tests/integration.sh build/sshell
+[test] external
+[test] single quotes
+[test] double quotes
+[test] escape
+[test] pipeline
+[test] output redirect
+[test] append redirect
+[test] input redirect
+[test] pwd builtin
+[test] cd persistence
+[test] builtin redirect
+[test] status
+[test] not found
+[test] explicit exit
+[test] malformed pipeline
+integration_tests=PASS
+
+=== REPRESENTATIVE SIMPLE COMMAND ===
+shell-ok
+
+=== REPRESENTATIVE PIPELINE ===
+BETA
+
+=== REPRESENTATIVE REDIRECTION ===
+redirected
+
+=== REPRESENTATIVE BUILTINS ===
+/home/fonke/systems-software-engineering/projects/unix-shell
+builtins: cd pwd status help exit
+operators: | < > >>
+
+=== SANITIZER VALIDATION ===
+rm -rf build workspace
+make CFLAGS="-std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1" all
+make[1]: Entering directory '/home/fonke/systems-software-engineering/projects/unix-shell'
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/parser.c -o build/parser.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/builtins.c -o build/builtins.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/execute.c -o build/execute.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/util.c -o build/util.o
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 build/main.o build/parser.o build/builtins.o build/execute.o build/util.o -o build/sshell
+make[1]: Leaving directory '/home/fonke/systems-software-engineering/projects/unix-shell'
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1 ./tests/integration.sh build/sshell
+[test] external
+[test] single quotes
+[test] double quotes
+[test] escape
+[test] pipeline
+[test] output redirect
+[test] append redirect
+[test] input redirect
+[test] pwd builtin
+[test] cd persistence
+[test] builtin redirect
+[test] status
+[test] not found
+[test] explicit exit
+[test] malformed pipeline
+integration_tests=PASS
+
+=== RESTORE NORMAL BUILD ===
+rm -rf build workspace
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/parser.c -o build/parser.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/builtins.c -o build/builtins.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/execute.c -o build/execute.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/util.c -o build/util.o
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 build/main.o build/parser.o build/builtins.o build/execute.o build/util.o -o build/sshell
+
+=== RESULT ===
+PASS
