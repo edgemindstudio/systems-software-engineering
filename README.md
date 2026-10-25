@@ -1,64 +1,71 @@
 # Systems Software Engineering
 
-This repository is a practical laboratory program for developing the skills required for systems software engineering.
+A practical systems software engineering portfolio built around Linux, C, C++, operating-system interfaces, debugging, concurrency, networking, performance, binary/runtime analysis, incident investigation, and progressively larger systems projects.
 
-The focus is not on completing isolated programming exercises or memorizing theory. The goal is to build, inspect, debug, measure, and reason about software in environments that resemble real engineering work.
-
-The labs progress from engineering environment setup and C systems fundamentals into Linux system programming, memory management, processes, concurrency, networking, debugging, performance analysis, binary inspection, and larger systems projects.
-
-## Program Philosophy
-
-The repository follows a practical engineering cycle:
+The repository is organized around one engineering principle:
 
 ```text
-Learn
-  ↓
+Understand
+    ↓
 Build
-  ↓
+    ↓
+Run
+    ↓
+Observe
+    ↓
 Break
-  ↓
+    ↓
 Debug
-  ↓
+    ↓
 Measure
-  ↓
-Improve
-  ↓
-Explain
+    ↓
+Validate
+    ↓
+Document
 ```
 
-The emphasis is on developing engineering judgment.
+The emphasis is not on isolated syntax exercises. The work is intended to demonstrate how low-level software is built, inspected, tested, debugged, measured, and explained using realistic engineering tools and evidence.
 
-A learner should not only know how something works when everything is correct. They should also learn how to investigate failures, understand unfamiliar code, work with tools, interpret evidence, test changes, and explain technical decisions.
+## Portfolio Status
 
-## What This Repository Is Designed To Develop
+The planned laboratory program, incident program, and seven major projects are complete.
 
-The program is designed to build practical ability in areas including:
+```text
+13 technical domains
+82 labs
+10 incident investigations
+7 major projects
+```
+
+The final capstone integrates Unix-domain IPC, framed request/response communication, bounded worker-thread concurrency, `/proc` inspection, filesystem metadata, ELF inspection, graceful shutdown, concurrent-client testing, ASan/UBSan, and ThreadSanitizer validation.
+
+## Technical Areas
+
+The repository demonstrates practical work in:
 
 - C systems programming
 - modern C++ for systems work
 - Linux system calls
-- file descriptors and I/O
-- processes and program execution
+- file descriptors and robust I/O
+- process creation and execution
 - signals and interprocess communication
-- memory management
-- virtual memory
-- concurrency
-- networking
-- debugging
-- build systems
-- static analysis
-- profiling
-- performance engineering
-- ELF and binary inspection
-- linking and loading
-- Git engineering workflows
-- automated testing
+- virtual memory and memory protection
+- multithreading and synchronization
+- atomic operations
+- TCP, UDP, IPv6, framing, and nonblocking I/O
+- debugging with GDB and LLDB
+- Valgrind and sanitizers
+- benchmarking and performance analysis
+- ELF, symbols, relocations, linking, and loading
+- static and shared libraries
+- build systems and Git engineering workflow
 - incident investigation
 - engineering documentation
+- reproducible validation
 
 ## Repository Structure
 
-The main curriculum is divided into technical domains:
+### Technical Domains
 
 ```text
 00-engineering-environment
@@ -76,184 +83,194 @@ The main curriculum is divided into technical domains:
 12-binary-runtime
 ```
 
-Each domain contains a sequence of practical labs.
+Each domain contains practical labs with source, validation, evidence, and documentation appropriate to the topic.
 
-The repository also contains:
+### Incident Program
 
 ```text
 incidents/
 ```
 
-for realistic engineering failure investigations, and:
+The incident program contains ten failure investigations covering:
+
+- file-descriptor leaks
+- zombie processes
+- pipe deadlocks
+- use-after-free defects
+- data races
+- TCP framing failures
+- shared-library lookup failures
+- execute-permission failures
+- sparse-file storage behavior
+- tiny-write performance regressions
+
+The incident work is intentionally less guided than normal labs and emphasizes reproduction, evidence collection, root-cause reasoning, correction, and validation.
+
+### Major Projects
 
 ```text
 projects/
+├── systems-utility-suite/
+├── unix-shell/
+├── memory-allocator/
+├── thread-runtime/
+├── network-service/
+├── binary-inspector/
+└── final-capstone/
 ```
 
-for larger systems projects that combine multiple skills.
+The major projects increase in scope and independence.
 
-## Learning Progression
+#### Systems Utility Suite
 
-The program begins with the engineering environment and progresses toward increasingly independent systems work.
+A C systems utility combining filesystem metadata inspection, robust file copying, recursive directory traversal, hexadecimal inspection, and `/proc` process information.
 
-Early labs are more guided.
+#### Unix Shell
 
-Later labs require more investigation, tool selection, debugging, and architectural judgment.
+A foreground Unix shell supporting external commands, quoted tokenization, N-stage pipelines, redirection, built-ins, exit-status propagation, and signal behavior.
 
-The intended progression is:
+#### Memory Allocator
 
-```text
-Guided Lab
-    ↓
-Engineering Lab
-    ↓
-Investigation
-    ↓
-Incident
-    ↓
-Integration Project
-    ↓
-Capstone
-```
+A fixed-arena allocator implementing alignment, first-fit allocation, block splitting, adjacent coalescing, `calloc`, `realloc`, statistics, invariant validation, stress tests, and sanitizer-backed verification.
 
-As the program progresses, instructions become less prescriptive.
+#### Thread Runtime
 
-The learner is increasingly expected to determine:
+A bounded POSIX-thread worker runtime with multiple producers, backpressure, condition-variable coordination, graceful draining, statistics, high-volume testing, ASan/UBSan, and ThreadSanitizer validation.
 
-- what part of the system is failing;
-- which tools are appropriate;
-- what evidence is needed;
-- what change should be made;
-- how the change should be validated.
+#### Network Service
 
-## Lab Structure
+A concurrent framed TCP service with explicit length-prefix framing, partial-I/O handling, a bounded connection queue, worker threads, malformed-frame rejection, concurrent clients, and graceful shutdown.
 
-Individual labs may contain directories such as:
+#### Binary Inspector
 
-```text
-src/
-scripts/
-tests/
-artifacts/
-evidence/
-reports/
-benchmarks/
-docs/
-```
+A direct ELF64 parser that reads headers, sections, program headers, symbols, dynamic dependencies, and file-offset/virtual-address mappings without using binutils as its implementation.
 
-The exact structure depends on the purpose of the lab.
+#### Final Capstone — SysDiag
 
-Every lab should clearly define:
-
-- objective;
-- engineering context;
-- required tools;
-- tasks;
-- expected deliverables;
-- validation method;
-- completion criteria.
-
-See `LAB_STANDARD.md` for the repository-wide lab standard.
+A local diagnostics daemon and CLI using Unix-domain sockets, framed IPC, bounded worker concurrency, `/proc` inspection, filesystem metadata, ELF inspection, structured errors, graceful shutdown, ASan/UBSan, and ThreadSanitizer.
 
 ## Engineering Evidence
 
-The purpose of the repository is not simply to show finished code.
+The repository preserves evidence where it materially supports engineering conclusions.
 
-Labs may preserve engineering evidence such as:
+Depending on the lab, incident, or project, this includes:
 
-- compiler output;
-- object files;
-- assembly;
-- traces;
-- profiling data;
-- benchmark results;
-- failure logs;
-- debugger observations;
-- reports;
-- test results;
-- root-cause analysis.
+- compiler and linker diagnostics
+- test output
+- sanitizer output
+- debugger observations
+- traces
+- binary inspection
+- benchmark measurements
+- profiler or system-call observations
+- failure reproduction
+- before-and-after comparisons
+- validation transcripts
+- engineering reports
 
-This evidence documents how a conclusion was reached, not only the final answer.
+Evidence is intended to show how a conclusion was reached rather than only presenting final source code.
 
-## Incidents
+## Validation Philosophy
 
-The `incidents/` section contains realistic failure scenarios including:
+Completion is based on demonstrated behavior, not merely successful compilation.
 
-- memory growth;
-- file corruption;
-- hanging services;
-- CPU regressions;
-- deployment failures;
-- network-service collapse;
-- CI-only failures;
-- unfamiliar repository work;
-- security and robustness defects;
-- regression investigation.
-
-These incidents intentionally provide less guidance than normal labs.
-
-The goal is to develop investigation and debugging judgment.
-
-## Projects
-
-The larger engineering projects include:
+Where applicable, work is validated with combinations of:
 
 ```text
-systems-utility-suite
-shell
-allocator
-thread-runtime
-network-service
-binary-inspector
-final-capstone
+strict compiler warnings
+automated tests
+integration tests
+stress tests
+ASan
+UBSan
+ThreadSanitizer
+Valgrind
+GDB / LLDB
+strace / ltrace
+binutils
+benchmarking
+runtime evidence
 ```
 
-Projects are intended to integrate knowledge from several technical domains.
+Not every tool is appropriate for every artifact. Validation is selected according to the behavior and failure modes being investigated.
 
-## Completion Standard
+## Learning and Engineering Progression
 
-A lab is not considered complete simply because the program runs.
+The repository progresses from guided environment and language fundamentals toward increasingly independent engineering work:
 
-Depending on the lab, completion may require:
+```text
+Foundational Lab
+      ↓
+Systems Lab
+      ↓
+Debugging / Measurement
+      ↓
+Incident Investigation
+      ↓
+Integration Project
+      ↓
+Final Capstone
+```
 
-- successful compilation;
-- passing tests;
-- clean warnings;
-- sanitizer checks;
-- static analysis;
-- correct error handling;
-- benchmark evidence;
-- debugging evidence;
-- engineering documentation;
-- root-cause explanation;
-- reproducible execution.
+Later work requires more judgment about:
 
-The quality of reasoning matters as much as the final implementation.
+- what behavior must be verified;
+- which system interfaces are relevant;
+- which debugging or measurement tools to use;
+- what failure cases matter;
+- what evidence is sufficient;
+- what design tradeoffs should be documented.
 
-## Current Progress
+## Repository Standards
 
-Completed:
+Repository-wide standards are documented in:
 
-- Lab 00-01 — Linux Engineering Environment
-- Lab 00-02 — Compilation Pipeline Investigation
+- [`LAB_STANDARD.md`](LAB_STANDARD.md)
+- [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- [`ROADMAP.md`](ROADMAP.md)
 
-In progress:
+Individual domains, incidents, and major projects also contain their own READMEs and evidence.
 
-- Domain 00 — Engineering Environment
+## Development Environment
 
-## Long-Term Goal
+The repository has been developed and validated primarily on Linux under WSL2 using a modern GNU/LLVM systems toolchain.
 
-The goal of this repository is to develop a practical body of systems-engineering work that demonstrates the ability to:
+Representative tools used across the work include:
 
-- enter an unfamiliar Linux/C/C++ environment;
-- build and inspect software;
-- understand system-level behavior;
-- investigate failures;
-- reason about memory and concurrency;
-- diagnose performance problems;
-- work with binaries and toolchains;
-- implement bounded changes;
-- validate those changes;
-- document engineering decisions clearly.
+```text
+GCC
+Clang
+GNU Make
+CMake
+Ninja
+GDB
+LLDB
+Valgrind
+strace
+ltrace
+perf
+binutils
+clang-tidy
+Cppcheck
+Git
+GitHub CLI
+```
 
-This repository is intended to grow progressively as each lab, incident, and project is completed.
+Platform-specific limitations are documented where they materially affect a lab or validation result.
+
+## Engineering Goal
+
+The purpose of this repository is to demonstrate practical readiness for systems software engineering work by showing the ability to:
+
+- enter and understand a Linux/C/C++ development environment;
+- work with low-level operating-system interfaces;
+- reason about memory, ownership, processes, concurrency, and I/O;
+- design bounded and testable systems components;
+- reproduce and diagnose failures;
+- use debugging and analysis tools deliberately;
+- measure performance rather than guess;
+- inspect executable/runtime behavior;
+- validate corrections with evidence;
+- communicate engineering decisions clearly.
+
+The repository is complete as a foundational systems-software engineering program and remains suitable for further extension with deeper flagship projects, platform-specific work, kernel-facing systems, or production-scale infrastructure.

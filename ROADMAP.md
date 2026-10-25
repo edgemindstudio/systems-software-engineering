@@ -1,29 +1,50 @@
 # Systems Software Engineering Roadmap
 
-This roadmap defines the progression of the Systems Software Engineering laboratory program.
+This roadmap records the completed progression of the Systems Software Engineering laboratory program.
 
-The sequence is intentionally practical and cumulative. Later sections assume competence developed in earlier sections.
+The sequence is practical and cumulative. Later sections build on engineering competence established in earlier domains.
 
-## Domain 00 — Engineering Environment
+## Completion Summary
+
+```text
+Domain 00 — Engineering Environment        COMPLETE
+Domain 01 — C Systems Foundations          COMPLETE
+Domain 02 — Library Engineering            COMPLETE
+Domain 03 — Linux File I/O                 COMPLETE
+Domain 04 — Processes                      COMPLETE
+Domain 05 — IPC and Signals                COMPLETE
+Domain 06 — Memory                         COMPLETE
+Domain 07 — Concurrency                    COMPLETE
+Domain 08 — Networking                     COMPLETE
+Domain 09 — C++ Systems Engineering        COMPLETE
+Domain 10 — Debugging                      COMPLETE
+Domain 11 — Performance                    COMPLETE
+Domain 12 — Binary and Runtime             COMPLETE
+Incident Program                           COMPLETE
+Major Projects                             COMPLETE
+Final Capstone                             COMPLETE
+```
+
+## Domain 00 — Engineering Environment — COMPLETE
 
 Purpose:
 
 Establish the engineering workstation and understand the development toolchain.
 
-Labs:
+Completed labs:
 
 - Lab 00-01 — Linux Engineering Environment
 - Lab 00-02 — Compilation Pipeline Investigation
 - Lab 00-03 — Git Engineering Workflow
 - Lab 00-04 — Build System Foundations
 
-Expected outcome:
+Outcome:
 
-The learner can configure and verify a Linux systems development environment, understand how source code becomes an executable, use Git safely in an engineering workflow, and work with common build systems.
+A verified Linux systems-development environment, practical understanding of the compilation pipeline, disciplined Git workflow, and working knowledge of common build-system foundations.
 
-## Domain 01 — C Systems Foundations
+## Domain 01 — C Systems Foundations — COMPLETE
 
-Labs:
+Completed labs:
 
 - Lab 01-01 — Memory Representation
 - Lab 01-02 — Pointer Mechanics
@@ -33,13 +54,13 @@ Labs:
 - Lab 01-06 — Linked Structures
 - Lab 01-07 — Hash Table
 
-Expected outcome:
+Outcome:
 
-The learner can reason about memory representation, pointers, ownership, allocation, lifetime, and reusable data structures in C.
+Practical reasoning about memory representation, pointers, ownership, allocation, lifetime, and reusable C data structures.
 
-## Domain 02 — Library Engineering
+## Domain 02 — Library Engineering — COMPLETE
 
-Labs:
+Completed labs:
 
 - Lab 02-01 — Multi-Module C Project
 - Lab 02-02 — Error-Handling Architecture
@@ -47,193 +68,247 @@ Labs:
 - Lab 02-04 — Shared Library
 - Lab 02-05 — ABI Breakage Investigation
 
-Expected outcome:
+Outcome:
 
-The learner can design modular C interfaces, separate implementation from public API, handle failures consistently, and understand static versus dynamic library behavior.
+Modular C interfaces, public/private implementation boundaries, consistent failure handling, static/shared linking, and ABI reasoning.
 
-## Domain 03 — Linux File I/O
+## Domain 03 — Linux File I/O — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 03-01 — Raw File Copy
-- Lab 03-02 — File Descriptor Investigation
-- Lab 03-03 — Seek and Sparse Files
-- Lab 03-04 — Buffered vs Unbuffered I/O
-- Lab 03-05 — File Metadata Utility
-- Lab 03-06 — Directory Walker
-- Lab 03-07 — Durable Write Investigation
-- Lab 03-08 — mmap File Processor
+- Lab 03-01 — File Descriptors and Robust I/O
+- Lab 03-02 — File Offsets and Descriptor Duplication
+- Lab 03-03 — File Metadata and Links
+- Lab 03-04 — Directory Traversal
+- Lab 03-05 — Sparse Files
+- Lab 03-06 — Vectored I/O
+- Lab 03-07 — Memory-Mapped File I/O
+- Lab 03-08 — Advisory File Locking
 
-Expected outcome:
+Outcome:
 
-The learner can work directly with Linux file descriptors, file metadata, directory traversal, durability concerns, memory-mapped files, and low-level I/O behavior.
+Direct work with Linux file descriptors, robust reads/writes, offsets, duplicated descriptors, metadata, links, traversal, sparse storage, vectored I/O, `mmap`, and advisory locking.
 
-## Domain 04 — Processes
+## Domain 04 — Processes — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 04-01 — Process Explorer
-- Lab 04-02 — fork Laboratory
-- Lab 04-03 — exec Laboratory
-- Lab 04-04 — Process Supervisor
-- Lab 04-05 — Zombie and Orphan Investigation
-- Lab 04-06 — Mini Shell
+- Lab 04-01 — `fork()` and Copy-on-Write
+- Lab 04-02 — `exec()` Image Replacement
+- Lab 04-03 — `waitpid()` and Child Reaping
+- Lab 04-04 — Process Trees and Ancestry
+- Lab 04-05 — `fork()` / `exec()` Inheritance
+- Lab 04-06 — Process Groups and Sessions
 
-Expected outcome:
+Outcome:
 
-The learner can reason about process creation, execution, parent-child relationships, exit status, process lifecycle, and shell-like execution.
+Practical understanding of process creation, image replacement, lifecycle management, reaping, ancestry, descriptor/state inheritance, process groups, and sessions.
 
-## Domain 05 — IPC and Signals
+## Domain 05 — IPC and Signals — COMPLETE
 
-Labs:
+Completed labs:
 
 - Lab 05-01 — Anonymous Pipes
-- Lab 05-02 — Pipeline Executor
-- Lab 05-03 — Named Pipes
-- Lab 05-04 — Signals
-- Lab 05-05 — Shared Memory IPC
-- Lab 05-06 — IPC Service
+- Lab 05-02 — Multi-Process Pipeline
+- Lab 05-03 — Safe Signal Handling
+- Lab 05-04 — Signal Masks and `sigsuspend()`
+- Lab 05-05 — Named FIFO
+- Lab 05-06 — POSIX Shared Memory
 
-Expected outcome:
+Outcome:
 
-The learner can build and debug communication between processes using common Unix IPC mechanisms.
+Practical interprocess communication and signal coordination using pipes, FIFOs, shared memory, signal handlers, signal masks, and race-resistant waiting patterns.
 
-## Domain 06 — Memory
+## Domain 06 — Memory — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 06-01 — Process Address-Space Explorer
-- Lab 06-02 — Page-Fault Investigation
-- Lab 06-03 — mmap Anonymous Memory
-- Lab 06-04 — Memory Allocator I
-- Lab 06-05 — Memory Allocator II
-- Lab 06-06 — Allocator Debugging
-- Lab 06-07 — Allocator Benchmarking
+- Lab 06-01 — Virtual Address Space
+- Lab 06-02 — Anonymous `mmap()`
+- Lab 06-03 — Memory Protection and Guard Pages
+- Lab 06-04 — `fork()` Copy-on-Write Memory
+- Lab 06-05 — Page Residency and Faults
+- Lab 06-06 — `madvise()` and Reclamation
+- Lab 06-07 — Address-Space Limits
 
-Expected outcome:
+Outcome:
 
-The learner can reason about virtual memory, process layout, page behavior, allocation, fragmentation, allocator design, and allocator performance.
+Practical understanding of virtual memory, mappings, memory protection, copy-on-write, residency, page-fault behavior, reclamation hints, and address-space constraints.
 
-## Domain 07 — Concurrency
+## Domain 07 — Concurrency — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 07-01 — Thread Fundamentals
-- Lab 07-02 — Race Condition
-- Lab 07-03 — Mutex Laboratory
-- Lab 07-04 — Condition Variables
-- Lab 07-05 — Thread Pool
-- Lab 07-06 — Deadlock Laboratory
-- Lab 07-07 — Reader/Writer Workload
-- Lab 07-08 — Atomic Operations
+- Lab 07-01 — Thread Lifecycle
+- Lab 07-02 — Mutex-Protected Counter
+- Lab 07-03 — Condition Variables
+- Lab 07-04 — Bounded Producer/Consumer
+- Lab 07-05 — Atomic Counter
+- Lab 07-06 — Race Detection
+- Lab 07-07 — Reader/Writer Lock
+- Lab 07-08 — Bounded Worker Pool
 
-Expected outcome:
+Outcome:
 
-The learner can build and debug multithreaded software and reason about race conditions, synchronization, deadlocks, coordination, and atomic operations.
+Practical multithreaded engineering with lifecycle management, mutexes, condition variables, bounded queues, atomics, race detection, reader/writer synchronization, and worker pools.
 
-## Domain 08 — Networking
+## Domain 08 — Networking — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 08-01 — TCP Client
-- Lab 08-02 — TCP Server
-- Lab 08-03 — Protocol Design
-- Lab 08-04 — Multi-Client Server
-- Lab 08-05 — Nonblocking I/O
-- Lab 08-06 — Event-Driven Server
-- Lab 08-07 — Network Failure Simulation
+- Lab 08-01 — Address Resolution
+- Lab 08-02 — TCP Loopback Echo
+- Lab 08-03 — UDP Datagrams
+- Lab 08-04 — Length-Prefixed Framing
+- Lab 08-05 — Nonblocking `poll()`
+- Lab 08-06 — IPv6 Loopback
+- Lab 08-07 — Threaded TCP Service
 
-Expected outcome:
+Outcome:
 
-The learner can build robust networked programs using sockets and handle partial I/O, malformed input, disconnects, concurrency, and scalable I/O models.
+Socket programming across TCP, UDP, IPv4/IPv6, explicit application framing, nonblocking I/O, readiness notification, concurrent clients, and service lifecycle handling.
 
-## Domain 09 — C++ Systems Engineering
+## Domain 09 — C++ Systems Engineering — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 09-01 — RAII
-- Lab 09-02 — Copy and Move Semantics
-- Lab 09-03 — Smart Pointer Investigation
-- Lab 09-04 — Generic Containers
-- Lab 09-05 — C API to C++ Wrapper
-- Lab 09-06 — C++ Systems Utility
+- Lab 09-01 — RAII File Descriptor
+- Lab 09-02 — Move Semantics
+- Lab 09-03 — Smart-Pointer Ownership
+- Lab 09-04 — `std::system_error` Handling
+- Lab 09-05 — Small Vector
+- Lab 09-06 — Thread-Safe Queue
 
-Expected outcome:
+Outcome:
 
-The learner can use modern C++ resource-management techniques for systems programming without losing sight of underlying system behavior.
+Modern C++ systems programming with RAII, move semantics, ownership models, system errors, custom containers, and synchronized data structures.
 
-## Domain 10 — Debugging
+## Domain 10 — Debugging — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 10-01 — Segmentation Fault Incident
-- Lab 10-02 — Memory Leak Incident
-- Lab 10-03 — Heap Corruption Incident
-- Lab 10-04 — Descriptor Leak
-- Lab 10-05 — Intermittent Concurrency Failure
-- Lab 10-06 — Broken Build
-- Lab 10-07 — Regression Hunt
+- Lab 10-01 — GDB Segmentation-Fault Analysis
+- Lab 10-02 — LLDB Crash Analysis
+- Lab 10-03 — Valgrind Heap Diagnostics
+- Lab 10-04 — AddressSanitizer
+- Lab 10-05 — UndefinedBehaviorSanitizer
+- Lab 10-06 — Assertions and Invariants
+- Lab 10-07 — Defect Isolation
 
-Expected outcome:
+Outcome:
 
-The learner can investigate failures with incomplete information and select appropriate debugging techniques independently.
+Practical failure investigation using debuggers, dynamic analysis, sanitizers, assertions, invariants, and systematic defect isolation.
 
-## Domain 11 — Performance
+## Domain 11 — Performance — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 11-01 — Benchmarking Correctly
-- Lab 11-02 — CPU Profiling
-- Lab 11-03 — Algorithmic Optimization
-- Lab 11-04 — Allocation Profiling
-- Lab 11-05 — Cache Behavior
-- Lab 11-06 — System-Call Analysis
+- Lab 11-01 — Monotonic Timing
+- Lab 11-02 — Repeated Benchmark Statistics
+- Lab 11-03 — Cache Locality
+- Lab 11-04 — System-Call Amortization
+- Lab 11-05 — Allocation Reuse
+- Lab 11-06 — Optimization Effects
 
-Expected outcome:
+Outcome:
 
-The learner can measure system performance correctly, identify bottlenecks, optimize software, and provide evidence for improvements.
+Measurement-driven performance engineering using monotonic timing, repeated trials, locality experiments, syscall-cost analysis, allocation reuse, and compiler-optimization comparisons.
 
-## Domain 12 — Binary and Runtime Fundamentals
+## Domain 12 — Binary and Runtime Fundamentals — COMPLETE
 
-Labs:
+Completed labs:
 
-- Lab 12-01 — ELF Inspector
-- Lab 12-02 — Basic ELF Parser
-- Lab 12-03 — Symbol Investigation
-- Lab 12-04 — Dynamic Loader Investigation
-- Lab 12-05 — Assembly Inspection
+- Lab 12-01 — ELF Header Inspection
+- Lab 12-02 — Sections and Symbols
+- Lab 12-03 — Relocations
+- Lab 12-04 — Dynamic Dependencies
+- Lab 12-05 — Shared-Library Runtime
 
-Expected outcome:
+Outcome:
 
-The learner can inspect ELF binaries, symbols, sections, loading behavior, generated assembly, and executable structure.
+Practical understanding of ELF headers, sections, symbols, relocations, dynamic dependencies, and runtime shared-library behavior.
 
-## Incident Program
+## Incident Program — COMPLETE
 
-The incident program contains realistic engineering failures:
+Completed investigations:
 
-- Incident 01 — Memory Growth
-- Incident 02 — File Corruption
-- Incident 03 — Hanging Service
-- Incident 04 — CPU Regression
-- Incident 05 — Broken Deployment
-- Incident 06 — Network Server Collapse
-- Incident 07 — CI-Only Failure
-- Incident 08 — Unfamiliar Repository Ticket
-- Incident 09 — Security and Robustness Defect
-- Incident 10 — Regression Investigation
+- Incident 01 — File Descriptor Leak
+- Incident 02 — Zombie Child
+- Incident 03 — Pipe Deadlock
+- Incident 04 — Use-After-Free
+- Incident 05 — Data Race
+- Incident 06 — TCP Framing Failure
+- Incident 07 — Shared-Library Lookup
+- Incident 08 — Execute Permission
+- Incident 09 — Sparse-File Space
+- Incident 10 — Tiny-Write Regression
 
-## Major Projects
+Outcome:
 
-- Systems Utility Suite
-- Unix Shell
-- Memory Allocator
-- Thread Runtime
-- Network Service
-- Binary Inspector
-- Final Capstone
+Less-guided debugging and investigation across resource leaks, process lifecycle, IPC deadlock, memory safety, concurrency, protocol correctness, dynamic linking, permissions, filesystem allocation, and performance regression.
+
+## Major Projects — COMPLETE
+
+### 1. Systems Utility Suite
+
+Combines filesystem metadata, robust file copy, recursive traversal, hexadecimal inspection, and `/proc` process information.
+
+### 2. Unix Shell
+
+Implements external command execution, quoting, pipelines, redirection, parent/child built-in behavior, signal behavior, and exit-status propagation.
+
+### 3. Memory Allocator
+
+Implements a fixed-arena allocator with alignment, splitting, coalescing, `calloc`, `realloc`, invariant validation, statistics, stress testing, and sanitizer validation.
+
+### 4. Thread Runtime
+
+Implements a bounded worker runtime with multiple producers, queue backpressure, condition-variable coordination, graceful draining, statistics, stress testing, ASan/UBSan, and ThreadSanitizer.
+
+### 5. Network Service
+
+Implements a concurrent length-prefixed TCP service with robust partial I/O, bounded connection queueing, worker threads, malformed-frame rejection, concurrent-client testing, and graceful shutdown.
+
+### 6. Binary Inspector
+
+Implements direct ELF64 parsing for headers, sections, segments, symbols, dynamic dependencies, and file-offset/virtual-address mapping with selected `readelf` parity checks.
+
+### 7. Final Capstone — SysDiag
+
+Integrates Unix-domain sockets, framed IPC, worker-thread concurrency, bounded queues, `/proc` inspection, filesystem metadata, ELF inspection, structured errors, concurrent clients, graceful shutdown, ASan/UBSan, and ThreadSanitizer.
 
 ## Progression Rule
 
-The roadmap is intended to be completed sequentially unless a later lab has clearly satisfied prerequisites through equivalent work.
+The roadmap was completed sequentially, with later work progressively requiring more independent engineering judgment.
 
-The program should become progressively less guided as competence increases.
+The intended progression remains:
+
+```text
+Foundational Lab
+      ↓
+Systems Lab
+      ↓
+Debugging / Measurement
+      ↓
+Incident Investigation
+      ↓
+Major Project
+      ↓
+Final Capstone
+```
+
+## Current State
+
+The foundational program represented by this roadmap is complete.
+
+Future work should extend depth rather than repeat foundational breadth. Suitable directions include:
+
+- deeper Linux internals;
+- kernel-facing interfaces;
+- advanced event-driven networking;
+- storage engines;
+- allocators and runtimes;
+- compilers/toolchains;
+- distributed systems infrastructure;
+- observability and performance tooling;
+- production-oriented C/C++ systems components.
