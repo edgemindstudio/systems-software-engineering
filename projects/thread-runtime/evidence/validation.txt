@@ -1,0 +1,82 @@
+========================================
+THREAD RUNTIME VALIDATION
+========================================
+Sat Oct 24 08:30:53 PM CDT 2026
+
+=== TOOLCHAIN ===
+Debian clang version 21.1.8 (7+b1)
+Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 GNU/Linux
+
+=== STRICT BUILD ===
+rm -rf build workspace
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread -c src/thread_runtime.c -o build/thread_runtime.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread tests/test_runtime.c build/thread_runtime.o -o build/test_runtime
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread bench/benchmark.c build/thread_runtime.o -o build/thread_runtime_benchmark
+
+=== FUNCTIONAL / STRESS TESTS ===
+./build/test_runtime
+basic_execution=PASS
+bounded_backpressure=PASS
+concurrent_producers=PASS
+shutdown_rejection=PASS
+high_volume=PASS
+thread_runtime_tests=PASS
+
+=== BENCHMARK / CONSISTENCY CHECK ===
+./build/thread_runtime_benchmark
+tasks=100000
+workers=8
+queue_capacity=256
+elapsed_seconds=0.176243176
+submitted_tasks=100000
+completed_tasks=100000
+queued_tasks=0
+active_tasks=0
+counter=100000
+runtime_consistent=yes
+
+=== ASAN + UBSAN VALIDATION ===
+rm -rf build workspace
+make CFLAGS="-std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -pthread" build/test_runtime
+make[1]: Entering directory '/home/fonke/systems-software-engineering/projects/thread-runtime'
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -pthread -c src/thread_runtime.c -o build/thread_runtime.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -pthread tests/test_runtime.c build/thread_runtime.o -o build/test_runtime
+make[1]: Leaving directory '/home/fonke/systems-software-engineering/projects/thread-runtime'
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 \
+UBSAN_OPTIONS=halt_on_error=1 \
+./build/test_runtime
+basic_execution=PASS
+bounded_backpressure=PASS
+concurrent_producers=PASS
+shutdown_rejection=PASS
+high_volume=PASS
+thread_runtime_tests=PASS
+
+=== THREADSANITIZER VALIDATION ===
+rm -rf build workspace
+make CFLAGS="-std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=thread -fno-omit-frame-pointer -O1 -pthread" build/test_runtime
+make[1]: Entering directory '/home/fonke/systems-software-engineering/projects/thread-runtime'
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=thread -fno-omit-frame-pointer -O1 -pthread -c src/thread_runtime.c -o build/thread_runtime.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=thread -fno-omit-frame-pointer -O1 -pthread tests/test_runtime.c build/thread_runtime.o -o build/test_runtime
+make[1]: Leaving directory '/home/fonke/systems-software-engineering/projects/thread-runtime'
+TSAN_OPTIONS=halt_on_error=1 \
+./build/test_runtime
+basic_execution=PASS
+bounded_backpressure=PASS
+concurrent_producers=PASS
+shutdown_rejection=PASS
+high_volume=PASS
+thread_runtime_tests=PASS
+
+=== RESTORE NORMAL BUILD ===
+rm -rf build workspace
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread -c src/thread_runtime.c -o build/thread_runtime.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread tests/test_runtime.c build/thread_runtime.o -o build/test_runtime
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -pthread bench/benchmark.c build/thread_runtime.o -o build/thread_runtime_benchmark
+
+=== RESULT ===
+PASS
