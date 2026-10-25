@@ -1,0 +1,26 @@
+=== LAB 12-04 VALIDATION ===
+Sat Oct 24 07:35:29 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/dynamic_deps_demo -lm
+
+=== PROGRAM OUTPUT ===
+sqrt=9.0
+
+=== INTERPRETER ===
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+
+=== NEEDED ENTRIES ===
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+
+=== LDD ===
+	linux-vdso.so.1 (0x00007ffd33cd8000)
+	libm.so.6 => /usr/lib/x86_64-linux-gnu/libm.so.6 (0x000079ac15a90000)
+	libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x000079ac1589a000)
+	/lib64/ld-linux-x86-64.so.2 (0x000079ac15ba2000)
+dynamic_dependencies_verified=yes
+
+=== RESULT ===
+PASS

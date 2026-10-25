@@ -1,0 +1,10 @@
+**/build/
+**/workspace/
+*.o
+*.a
+*.so
+*.so.*
+*.out
+*.log
+*.tmp
+.DS_Store

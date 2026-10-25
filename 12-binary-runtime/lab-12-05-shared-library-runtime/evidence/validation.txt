@@ -1,0 +1,48 @@
+=== LAB 12-05 VALIDATION ===
+Sat Oct 24 07:35:29 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -fPIC -Iinclude -shared -Wl,-soname,libruntimemath.so.1 src/runtime_math.c -o build/lib/libruntimemath.so.1.0.0
+ln -sf libruntimemath.so.1.0.0 build/lib/libruntimemath.so.1
+ln -sf libruntimemath.so.1 build/lib/libruntimemath.so
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -Iinclude src/main.c -Lbuild/lib -lruntimemath 		-Wl,-rpath,'$ORIGIN/../lib' -o build/bin/runtime_loader_demo
+
+=== LIBRARY FILES ===
+total 16
+lrwxrwxrwx 1 fonke fonke    19 Oct 24 19:35 libruntimemath.so -> libruntimemath.so.1
+lrwxrwxrwx 1 fonke fonke    23 Oct 24 19:35 libruntimemath.so.1 -> libruntimemath.so.1.0.0
+-rwxr-xr-x 1 fonke fonke 16368 Oct 24 19:35 libruntimemath.so.1.0.0
+
+=== SONAME ===
+ 0x000000000000000e (SONAME)             Library soname: [libruntimemath.so.1]
+
+=== APP RUNPATH / NEEDED ===
+ 0x0000000000000001 (NEEDED)             Shared library: [libruntimemath.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000001d (RUNPATH)            Library runpath: [$ORIGIN/../lib]
+
+=== LDD ===
+	linux-vdso.so.1 (0x00007ffd12319000)
+	libruntimemath.so.1 => /home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/libruntimemath.so.1 (0x00007fe4c22e1000)
+	libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x00007fe4c20d6000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fe4c22ed000)
+
+=== PROGRAM OUTPUT ===
+runtime_multiply=42
+
+=== LOADER TRACE (filtered) ===
+     14483:	find library=libruntimemath.so.1 [0]; searching
+     14483:	 search path=/home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/glibc-hwcaps/x86-64-v3:/home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/glibc-hwcaps/x86-64-v2:/home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib		(RUNPATH from file build/bin/runtime_loader_demo)
+     14483:	  trying file=/home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/glibc-hwcaps/x86-64-v3/libruntimemath.so.1
+     14483:	  trying file=/home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/glibc-hwcaps/x86-64-v2/libruntimemath.so.1
+     14483:	  trying file=/home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/libruntimemath.so.1
+     14483:	 search path=/home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib		(RUNPATH from file build/bin/runtime_loader_demo)
+     14483:	calling init: /lib64/ld-linux-x86-64.so.2
+     14483:	calling init: /usr/lib/x86_64-linux-gnu/libc.so.6
+     14483:	calling init: /home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/libruntimemath.so.1
+     14483:	calling fini: /home/fonke/systems-software-engineering/12-binary-runtime/lab-12-05-shared-library-runtime/build/bin/../lib/libruntimemath.so.1 [0]
+shared_library_runtime_verified=yes
+
+=== RESULT ===
+PASS

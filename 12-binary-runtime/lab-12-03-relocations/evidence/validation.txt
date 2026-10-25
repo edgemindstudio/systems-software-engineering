@@ -1,0 +1,50 @@
+=== LAB 12-03 VALIDATION ===
+Sat Oct 24 07:35:29 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -c src/main.c -o build/relocations.o
+
+=== SYMBOL TABLE ===
+0000000000000000 T call_external
+                 U external_transform
+
+=== RELOCATIONS ===
+
+Relocation section '.rela.text' at offset 0x3e0 contains 1 entry:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+00000000000f  000a00000004 R_X86_64_PLT32    0000000000000000 external_transform - 4
+
+Relocation section '.rela.debug_info' at offset 0x3f8 contains 4 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000000008  00030000000a R_X86_64_32       0000000000000000 .debug_abbrev + 0
+000000000011  00040000000a R_X86_64_32       0000000000000000 .debug_str_offsets + 8
+000000000015  00070000000a R_X86_64_32       0000000000000000 .debug_line + 0
+00000000001f  00060000000a R_X86_64_32       0000000000000000 .debug_addr + 8
+
+Relocation section '.rela.debug_str_offsets' at offset 0x458 contains 6 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000000008  00050000000a R_X86_64_32       0000000000000000 .debug_str + 0
+00000000000c  00050000000a R_X86_64_32       0000000000000000 .debug_str + 23
+000000000010  00050000000a R_X86_64_32       0000000000000000 .debug_str + 2e
+000000000014  00050000000a R_X86_64_32       0000000000000000 .debug_str + 7f
+000000000018  00050000000a R_X86_64_32       0000000000000000 .debug_str + 8d
+00000000001c  00050000000a R_X86_64_32       0000000000000000 .debug_str + 91
+
+Relocation section '.rela.debug_addr' at offset 0x4e8 contains 1 entry:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000000008  000200000001 R_X86_64_64       0000000000000000 .text + 0
+
+Relocation section '.rela.eh_frame' at offset 0x500 contains 1 entry:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000000020  000200000002 R_X86_64_PC32     0000000000000000 .text + 0
+
+Relocation section '.rela.debug_line' at offset 0x518 contains 3 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000000022  00080000000a R_X86_64_32       0000000000000000 .debug_line_str + 0
+00000000002e  00080000000a R_X86_64_32       0000000000000000 .debug_line_str + 51
+000000000048  000200000001 R_X86_64_64       0000000000000000 .text + 0
+relocation_external_symbol_verified=yes
+
+=== RESULT ===
+PASS

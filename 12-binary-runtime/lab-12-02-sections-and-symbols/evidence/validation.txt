@@ -1,0 +1,23 @@
+=== LAB 12-02 VALIDATION ===
+Sat Oct 24 07:35:29 PM CDT 2026
+
+=== CLEAN BUILD ===
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/sections_symbols_demo
+
+=== PROGRAM OUTPUT ===
+exported_add=12
+
+=== SELECTED SECTIONS ===
+  [13] .text             PROGBITS         0000000000001050  00001050
+  [25] .data             PROGBITS         0000000000004008  00003008
+  [26] .bss              NOBITS           000000000000401c  0000301c
+
+=== SELECTED SYMBOLS ===
+0000000000001140 T exported_add
+0000000000004018 D initialized_global
+0000000000004020 B zero_initialized_global
+sections_symbols_verified=yes
+
+=== RESULT ===
+PASS
