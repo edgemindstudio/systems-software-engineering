@@ -1,0 +1,92 @@
+========================================
+SYSTEMS UTILITY SUITE VALIDATION
+========================================
+Sat Oct 24 08:10:16 PM CDT 2026
+
+=== TOOLCHAIN ===
+Debian clang version 21.1.8 (7+b1)
+Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 GNU/Linux
+
+=== STRICT BUILD ===
+rm -rf build workspace
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/common.c -o build/common.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_stat.c -o build/cmd_stat.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_copy.c -o build/cmd_copy.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_walk.c -o build/cmd_walk.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_hex.c -o build/cmd_hex.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_proc.c -o build/cmd_proc.o
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 build/main.o build/common.o build/cmd_stat.o build/cmd_copy.o build/cmd_walk.o build/cmd_hex.o build/cmd_proc.o -o build/sysutil
+
+=== INTEGRATION TESTS ===
+./tests/integration.sh build/sysutil
+[test] help
+[test] stat regular file
+[test] stat symlink without following
+[test] copy
+[test] walk
+[test] hex bounded output
+[test] proc self
+[test] invalid command
+integration_tests=PASS
+
+=== REPRESENTATIVE STAT ===
+path=README.md
+type=regular
+size=2785
+mode=0644
+inode=436913
+links=1
+
+=== REPRESENTATIVE HEX ===
+00000000  23 20 53 79 73 74 65 6d  73 20 55 74 69 6c 69 74  |# Systems Utilit|
+00000010  79 20 53 75 69 74 65 0a  0a 41 20 63 6f 6d 70 61  |y Suite..A compa|
+displayed_bytes=32
+
+=== REPRESENTATIVE PROC ===
+pid=self
+Name:	sysutil
+State:	R (running)
+VmRSS:	    1408 kB
+Threads:	1
+reported_fields=4
+
+=== SANITIZER VALIDATION ===
+rm -rf build workspace
+make CFLAGS="-std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1" all
+make[1]: Entering directory '/home/fonke/systems-software-engineering/projects/systems-utility-suite'
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/common.c -o build/common.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/cmd_stat.c -o build/cmd_stat.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/cmd_copy.c -o build/cmd_copy.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/cmd_walk.c -o build/cmd_walk.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/cmd_hex.c -o build/cmd_hex.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/cmd_proc.c -o build/cmd_proc.o
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 build/main.o build/common.o build/cmd_stat.o build/cmd_copy.o build/cmd_walk.o build/cmd_hex.o build/cmd_proc.o -o build/sysutil
+make[1]: Leaving directory '/home/fonke/systems-software-engineering/projects/systems-utility-suite'
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 \
+UBSAN_OPTIONS=halt_on_error=1 \
+./tests/integration.sh build/sysutil
+[test] help
+[test] stat regular file
+[test] stat symlink without following
+[test] copy
+[test] walk
+[test] hex bounded output
+[test] proc self
+[test] invalid command
+integration_tests=PASS
+
+=== RESTORE NORMAL BUILD ===
+rm -rf build workspace
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/main.c -o build/main.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/common.c -o build/common.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_stat.c -o build/cmd_stat.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_copy.c -o build/cmd_copy.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_walk.c -o build/cmd_walk.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_hex.c -o build/cmd_hex.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/cmd_proc.c -o build/cmd_proc.o
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 build/main.o build/common.o build/cmd_stat.o build/cmd_copy.o build/cmd_walk.o build/cmd_hex.o build/cmd_proc.o -o build/sysutil
+
+=== RESULT ===
+PASS
