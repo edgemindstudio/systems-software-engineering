@@ -1,0 +1,65 @@
+========================================
+MEMORY ALLOCATOR VALIDATION
+========================================
+Sat Oct 24 08:25:04 PM CDT 2026
+
+=== TOOLCHAIN ===
+Debian clang version 21.1.8 (7+b1)
+Linux 6.6.87.2-microsoft-standard-WSL2 x86_64 GNU/Linux
+
+=== STRICT BUILD ===
+rm -rf build workspace
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/allocator.c -o build/allocator.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 tests/test_allocator.c build/allocator.o -o build/test_allocator
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 bench/benchmark.c build/allocator.o -o build/allocator_benchmark
+
+=== FUNCTIONAL TESTS ===
+./build/test_allocator
+alignment=PASS
+split_reuse=PASS
+coalescing=PASS
+calloc_zeroing=PASS
+realloc_preservation=PASS
+exhaustion_recovery=PASS
+stats=PASS
+allocator_tests=PASS
+
+=== BENCHMARK / STEADY-STATE CHECK ===
+./build/allocator_benchmark
+iterations=200000
+elapsed_seconds=0.000601196
+allocated_blocks=0
+free_blocks=1
+largest_free_block=4194224
+allocator_valid=yes
+
+=== SANITIZER VALIDATION ===
+rm -rf build workspace
+make CFLAGS="-std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1" build/test_allocator
+make[1]: Entering directory '/home/fonke/systems-software-engineering/projects/memory-allocator'
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 -c src/allocator.c -o build/allocator.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -fsanitize=address,undefined -fno-omit-frame-pointer -O1 tests/test_allocator.c build/allocator.o -o build/test_allocator
+make[1]: Leaving directory '/home/fonke/systems-software-engineering/projects/memory-allocator'
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 \
+UBSAN_OPTIONS=halt_on_error=1 \
+./build/test_allocator
+alignment=PASS
+split_reuse=PASS
+coalescing=PASS
+calloc_zeroing=PASS
+realloc_preservation=PASS
+exhaustion_recovery=PASS
+stats=PASS
+allocator_tests=PASS
+
+=== RESTORE NORMAL BUILD ===
+rm -rf build workspace
+mkdir -p build
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 -c src/allocator.c -o build/allocator.o
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 tests/test_allocator.c build/allocator.o -o build/test_allocator
+clang -Iinclude -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 bench/benchmark.c build/allocator.o -o build/allocator_benchmark
+
+=== RESULT ===
+PASS
