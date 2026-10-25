@@ -1,0 +1,8 @@
+=== INC-08 ===
+Sat Oct 24 07:52:46 PM CDT 2026
+initial_mode=644
+failure_exit_code=126
+remediated_output=permission-demo-ran
+permission_failure_reproduced=yes
+execute_permission_remediation_verified=yes
+PASS

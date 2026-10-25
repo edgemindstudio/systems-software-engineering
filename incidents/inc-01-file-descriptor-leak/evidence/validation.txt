@@ -1,0 +1,10 @@
+=== INC-01 ===
+Sat Oct 24 07:52:44 PM CDT 2026
+rm -rf build workspace
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/incident_01_file_descriptor_leak
+fds_before=3
+fds_after_open=11
+fds_after_close=3
+leak_reproduced=yes
+cleanup_verified=yes
+PASS

@@ -1,0 +1,8 @@
+=== INC-02 ===
+Sat Oct 24 07:52:45 PM CDT 2026
+rm -rf build workspace
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/incident_02_zombie_child
+child_state_before_wait=Z
+zombie_observed=yes
+child_reaped=yes
+PASS

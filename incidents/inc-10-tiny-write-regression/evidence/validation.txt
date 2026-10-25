@@ -1,0 +1,10 @@
+=== INC-10 ===
+Sat Oct 24 07:52:47 PM CDT 2026
+rm -rf build workspace
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O2 src/main.c -o build/incident_10_tiny_write_regression
+total_bytes=8388608
+tiny_write_seconds=0.671524047
+batched_write_seconds=0.000156884
+tiny_to_batched_ratio=4280.386
+regression_reproduced=yes
+PASS

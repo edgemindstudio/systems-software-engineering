@@ -1,0 +1,10 @@
+=== INC-09 ===
+Sat Oct 24 07:52:46 PM CDT 2026
+rm -rf build workspace
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/incident_09_sparse_file_space
+logical_bytes=67108865
+allocated_bytes=4096
+sparse_behavior_observed=yes
+4.0K	workspace/sparse.bin
+65M	workspace/sparse.bin
+PASS

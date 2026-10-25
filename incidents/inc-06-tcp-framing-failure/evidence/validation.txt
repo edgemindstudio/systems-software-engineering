@@ -1,0 +1,9 @@
+=== INC-06 ===
+Sat Oct 24 07:52:46 PM CDT 2026
+rm -rf build workspace
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 src/main.c -o build/incident_06_tcp_framing_failure
+bytes_received=10
+stream_payload=HELLOWORLD
+message_boundaries_preserved=no
+framing_required=yes
+PASS

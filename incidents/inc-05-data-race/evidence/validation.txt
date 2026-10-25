@@ -1,0 +1,26 @@
+=== INC-05 ===
+Sat Oct 24 07:52:46 PM CDT 2026
+rm -rf build workspace
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O1 -fsanitize=thread -pthread src/main.c -o build/incident_05_data_race
+==================
+WARNING: ThreadSanitizer: data race (pid=15185)
+  Write of size 4 at 0x5555569eb718 by thread T2:
+    #0 worker /home/fonke/systems-software-engineering/incidents/inc-05-data-race/src/main.c:10:9 (incident_05_data_race+0xea431) (BuildId: 6282d6788313bb2f31eb64bf847223e47a5e65b2)
+
+  Previous write of size 4 at 0x5555569eb718 by thread T1:
+    #0 worker /home/fonke/systems-software-engineering/incidents/inc-05-data-race/src/main.c:10:9 (incident_05_data_race+0xea431) (BuildId: 6282d6788313bb2f31eb64bf847223e47a5e65b2)
+
+  Location is global 'counter' of size 4 at 0x5555569eb718 (incident_05_data_race+0x1497718)
+
+  Thread T2 (tid=15188, running) created by main thread at:
+    #0 pthread_create <null> (incident_05_data_race+0x655ce) (BuildId: 6282d6788313bb2f31eb64bf847223e47a5e65b2)
+    #1 main /home/fonke/systems-software-engineering/incidents/inc-05-data-race/src/main.c:21:9 (incident_05_data_race+0xea39f) (BuildId: 6282d6788313bb2f31eb64bf847223e47a5e65b2)
+
+  Thread T1 (tid=15187, finished) created by main thread at:
+    #0 pthread_create <null> (incident_05_data_race+0x655ce) (BuildId: 6282d6788313bb2f31eb64bf847223e47a5e65b2)
+    #1 main /home/fonke/systems-software-engineering/incidents/inc-05-data-race/src/main.c:20:9 (incident_05_data_race+0xea383) (BuildId: 6282d6788313bb2f31eb64bf847223e47a5e65b2)
+
+SUMMARY: ThreadSanitizer: data race /home/fonke/systems-software-engineering/incidents/inc-05-data-race/src/main.c:10:9 in worker
+==================
+tsan_exit_code=66
+PASS

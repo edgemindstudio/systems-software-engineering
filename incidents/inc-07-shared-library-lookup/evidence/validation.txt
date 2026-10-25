@@ -1,0 +1,23 @@
+=== INC-07 ===
+Sat Oct 24 07:52:46 PM CDT 2026
+rm -rf build
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -fPIC -Iinclude -shared src/lib.c -o build/lib/libincidentdemo.so
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -Iinclude src/main.c -Lbuild/lib -lincidentdemo -o build/bin/demo
+=== FAILURE WITHOUT SEARCH PATH ===
+build/bin/demo: error while loading shared libraries: libincidentdemo.so: cannot open shared object file: No such file or directory
+failure_exit_code=127
+=== LDD BEFORE REMEDIATION ===
+	linux-vdso.so.1 (0x00007ffe58753000)
+	libincidentdemo.so => not found
+	libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x00007fd64eb52000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fd64ed64000)
+=== REMEDIATION WITH LD_LIBRARY_PATH ===
+demo_value=77
+=== LDD WITH SEARCH PATH ===
+	linux-vdso.so.1 (0x00007ffd89ddc000)
+	libincidentdemo.so => /home/fonke/systems-software-engineering/incidents/inc-07-shared-library-lookup/build/lib/libincidentdemo.so (0x00007338471cd000)
+	libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x0000733846fc2000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007338471d9000)
+lookup_failure_reproduced=yes
+runtime_search_path_remediation_verified=yes
+PASS

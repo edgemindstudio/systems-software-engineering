@@ -1,0 +1,59 @@
+=== INC-04 ===
+Sat Oct 24 07:52:46 PM CDT 2026
+rm -rf build workspace
+clang -std=c17 -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -D_POSIX_C_SOURCE=200809L -g -O0 -fsanitize=address -fno-omit-frame-pointer src/main.c -o build/incident_04_use_after_free
+about_to_read_freed_memory=yes
+=================================================================
+==15168==ERROR: AddressSanitizer: heap-use-after-free on address 0x6c6b8f3e0010 at pc 0x565fcce98ba1 bp 0x7fffdd010450 sp 0x7fffdd010448
+READ of size 4 at 0x6c6b8f3e0010 thread T0
+    #0 0x565fcce98ba0 in main /home/fonke/systems-software-engineering/incidents/inc-04-use-after-free/src/main.c:15:12
+    #1 0x704b900dff74 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #2 0x704b900e0026 in __libc_start_main csu/../csu/libc-start.c:360:3
+    #3 0x565fccdaf360 in _start (/home/fonke/systems-software-engineering/incidents/inc-04-use-after-free/build/incident_04_use_after_free+0x2c360) (BuildId: 5fe73928889ba4a78319a02b83656d3b0b812314)
+
+0x6c6b8f3e0010 is located 0 bytes inside of 4-byte region [0x6c6b8f3e0010,0x6c6b8f3e0014)
+freed by thread T0 here:
+    #0 0x565fcce5466a in free (/home/fonke/systems-software-engineering/incidents/inc-04-use-after-free/build/incident_04_use_after_free+0xd166a) (BuildId: 5fe73928889ba4a78319a02b83656d3b0b812314)
+    #1 0x565fcce98b2e in main /home/fonke/systems-software-engineering/incidents/inc-04-use-after-free/src/main.c:10:5
+    #2 0x704b900dff74 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+previously allocated by thread T0 here:
+    #0 0x565fcce54908 in malloc (/home/fonke/systems-software-engineering/incidents/inc-04-use-after-free/build/incident_04_use_after_free+0xd1908) (BuildId: 5fe73928889ba4a78319a02b83656d3b0b812314)
+    #1 0x565fcce98ac8 in main /home/fonke/systems-software-engineering/incidents/inc-04-use-after-free/src/main.c:6:18
+    #2 0x704b900dff74 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/fonke/systems-software-engineering/incidents/inc-04-use-after-free/src/main.c:15:12 in main
+Shadow bytes around the buggy address:
+  0x6c6b8f3dfd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6c6b8f3dfe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6c6b8f3dfe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6c6b8f3dff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x6c6b8f3dff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x6c6b8f3e0000: fa fa[fd]fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6c6b8f3e0080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6c6b8f3e0100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6c6b8f3e0180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6c6b8f3e0200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x6c6b8f3e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==15168==ABORTING
+asan_exit_code=1
+PASS
